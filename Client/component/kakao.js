@@ -1,95 +1,68 @@
 import { StyleSheet, Text, View, Button, Alert, Image } from 'react-native';
 import React, { useState } from 'react';
 import {
-    KakaoOAuthToken,
-    KakaoProfile,
     getProfile,
     login,
-    logout,
-    unlink,
 } from '@react-native-seoul/kakao-login';
+import axios from 'axios';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator();
 
 const imgPath = require('../assets/login.png');
 
-function KakaoLogin() {
+function KakaoLogin({ navigation }) {
     const [result, setResult] = useState('');
+    let state = {
+        _isLogin: false,
+        _isUser: false
+    }
 
     const signInWithKakao = async () => {
         try {
             const token = await login();
-            setResult(JSON.stringify(token));
+            const profile = await getProfile(token);
+            console.log(profile.nickname, profile.email, profile.birthday, token.accessToken);
+
+            axios.post('http://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
+                .then((res) => {
+                    console.log(res.data)
+                    if(res.data.isUser !== 0) {
+                        state._isUser = true;
+                    }
+
+                    state._isUser ? navigation.navigate("Second", {language: "english"}) : navigation.navigate("Second", {email: profile.email, name: profile.nickname});
+                    console.log(state._isUser)
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setResult(JSON.stringify(err));
+                })
+
+
         } catch (err) {
             Alert.alert(err.message);
             console.log(err.message);
         }
     }
-    const signOutWithKakao = async () => {
-        try {
-            const message = await logout();
-            setResult(message);
-        } catch(err) {
-            Alert.alert(err.message);
-            console.log(err.message);
-        }
-        
-    };
-
-    const getKakaoProfile = async () => {
-        try {
-            const profile = await getProfile();
-            console.log(profile);
-            setResult(JSON.stringify(profile));
-        } catch (err) {
-            Alert.alert('err', err.message);
-            console.log(err.message);
-        }
-    };
-
-    const unlinkKakao = async () => {
-        try {
-            const message = await unlink();
-            setResult(message);
-        } catch (err) {
-            Alert.alert('err', err.message);
-            console.log(err.message);
-        }
-        
-    };
     return (
         <View style={styles.container}>
-            <Image style={styles.loginLogo} source={imgPath}/>
-            <Button style={styles.loginButton} title='로그인' onPress={signInWithKakao} color='#fd6f22' />
-            {/* <Button title="로그아웃" onPress={signOutWithKakao} />
-            <Button title="프로필" onPress={getKakaoProfile} />
-            <Button title="연결종료" onPress={unlinkKakao} /> */}
-            <Text>{result}</Text>
+            <Image style={styles.loginLogo} source={imgPath} />
+            <Button style={styles.loginButton} title='로그인' onPress={signInWithKakao} />
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({
     container: {
-    //   flex: ,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-    //   justifyContent: 'center',
-      borderStyle: 'solid',
-      borderWidth: 2
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        marginTop: 100
     },
-    input: {
-      width: 200,
-      height: 40,
-      margin: 8,
-      borderWidth: 1,
-      padding: 10,
+    loginButton: {
+        color: '#fd6f22',
     },
-    loginLogo:{
-        textAlign: 'center'
-    },
-    loginButton:{
-        backgroundColor:'#fd6f22',
-    },
-  });
+});
 
 export default KakaoLogin;

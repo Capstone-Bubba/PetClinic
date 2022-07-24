@@ -39,7 +39,21 @@ const insertUser = (parameters) => {
 //     })
 // }
 
+const checkUser = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT EXISTS (SELECT * FROM userInfo WHERE email = ?) AS isUser`;
+        db.query(query, parameters.email, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
+    checkUser
 }
