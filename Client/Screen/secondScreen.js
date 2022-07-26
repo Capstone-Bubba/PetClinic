@@ -43,26 +43,26 @@ export default function SecondScreen({ navigation, route }) {
                 style={styles.inputBox}
                 value={name}
             />
-            <View style={styles.dropDownBox}>
-                <DropDownPicker
-                    style={styles.dropDown}
-                    open={doOpen}
-                    value={value}
-                    items={state}
-                    setOpen={setDoOpen}
-                    setValue={setValue}
-                    setItems={setState}
-                />
-                <DropDownPicker
-                    style={styles.dropDown}
-                    open={siOpen}
-                    value={value}
-                    items={state}
-                    setOpen={setSiOpen}
-                    setValue={setValue}
-                    setItems={setState}
-                />
-            </View>
+            <DropDownPicker
+                style={styles.dropDown}
+                open={doOpen}
+                value={value}
+                items={state}
+                setOpen={setDoOpen}
+                setValue={setValue}
+                setItems={setState}
+                zIndex={2000}
+            />
+            <DropDownPicker
+                style={styles.dropDown}
+                open={siOpen}
+                value={value}
+                items={state}
+                setOpen={setSiOpen}
+                setValue={setValue}
+                setItems={setState}
+                zIndex={1000}
+            />
             <TextInput
                 style={styles.inputBox}
                 placeholder={'주소'}
@@ -73,17 +73,18 @@ export default function SecondScreen({ navigation, route }) {
                 placeholder={'전화번호'}
                 onChangeText={(phone) => setPhone(phone)}
             />
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         padding: 15,
         backgroundColor: '#fff',
-        display: 'flex',
         flexDirection: 'column',
-        flex: 1
+        flex: 1,
     },
     inputBox: {
         borderWidth: 1,
@@ -95,11 +96,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderRadius: 20,
         paddingLeft: 15,
-        width: '50%',
-    },
-    dropDownBox: {
-        display:'flex',
-        borderStyle:'solid',
-        flexDirection: 'row'
+        width: '70%',
     }
 })
