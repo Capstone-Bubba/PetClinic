@@ -14,7 +14,22 @@ const kakaoAppLogin = async (req, res) => {
     res.send({isUser: data[0].isUser})
 }
 
+const signUp = async (req, res) => {
+    try {
+        const parameters = {
+            email: req.body.email,
+            phone: req.body.phone,
+            user_name: req.body.name
+        }
+        const answer = await authDAO.insertUser(parameters);
+        res.send('1');
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     sendResult,
-    kakaoAppLogin
+    kakaoAppLogin,
+    signUp
 }
