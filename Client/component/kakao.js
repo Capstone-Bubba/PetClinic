@@ -5,11 +5,6 @@ import {
     login,
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
-const Stack = createNativeStackNavigator();
-
 const imgPath = require('../assets/login.png');
 
 function KakaoLogin({ navigation }) {
@@ -32,15 +27,16 @@ function KakaoLogin({ navigation }) {
                         state._isUser = true;
                     }
 
-                    state._isUser ? navigation.navigate("Second", {language: "english"}) : navigation.navigate("Second", {email: profile.email, name: profile.nickname});
+                    state._isUser ? 
+                    navigation.navigate("Second", {language: "english"}) : 
+                    navigation.navigate("Second", {email: profile.email, name: profile.nickname});
+
                     console.log(state._isUser)
                 })
                 .catch((err) => {
                     console.log(err);
                     setResult(JSON.stringify(err));
                 })
-
-
         } catch (err) {
             Alert.alert(err.message);
             console.log(err.message);

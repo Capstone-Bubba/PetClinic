@@ -7,4 +7,6 @@ router.get('/kakao/callback', passport.authenticate('kakao'), authCtrl.sendResul
 
 router.post('/kakao/login', authCtrl.kakaoAppLogin);
 
+router.post('/signup', authCtrl.signUp);
+
 module.exports = router;
