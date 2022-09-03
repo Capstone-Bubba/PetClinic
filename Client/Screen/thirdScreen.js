@@ -1,4 +1,4 @@
-import { Text, View, Button, Image, SafeAreaView, StyleSheet, PermissionsAndroid, Alert } from 'react-native';
+import { Text, View, Button, Image, SafeAreaView, StyleSheet, PermissionsAndroid, Alert, Touchable, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 const imgPath = require('../assets/login.png');
@@ -99,7 +99,7 @@ export default function ThirdScreen({ navigation }) {
         const type = match ? `image/${match[1]}` : `image`
         const formData = new FormData();
         formData.append('images', { uri: photo.uri, name: name, type })
-        
+
         await axios({
             method: 'post',
             url: 'http://10.0.2.2:3000/testing',
@@ -111,21 +111,69 @@ export default function ThirdScreen({ navigation }) {
     }
 
     return (
-        <View>
-            <Image source={photo} style={{ width: 200, height: 200 }} />
-            <Button title="사진 촬영" onPress={showPicker} />
-            <Button title="사진 선택" onPress={choosePhoto} />
-            {show && <Button title='전송' onPress={sendPhoto} />}
+        <View style={styles.container}>
+            <View style={styles.imgContainer}>
+                <Image source={photo} style={styles.img} />
+            </View>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={showPicker} style={styles.buttonStyle}>
+                    <Text>사진 촬영</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={choosePhoto} style={styles.buttonStyle}>
+                    <Text>사진 선택</Text>
+                </TouchableOpacity>
+                {show &&
+                    <TouchableOpacity onPress={sendPhoto} style={styles.sendButtonStyle}>
+                        <Text>사진 전송</Text>
+                    </TouchableOpacity>
+                }
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+    },
+    imgContainer: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 30
     },
     img: {
-        borderStyle: 'solid',
-        borderWidth: 1
+        width: 300,
+        height: 300,
+    },
+    buttonStyle: {
+        width: 130,
+        height: 100,
+        backgroundColor: '#DDDD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        marginRight: '1%',
+        marginLeft: '1%',
+        marginBottom: '2%'
+    },
+    sendButtonStyle: {
+        width: 270,
+        height: 100,
+        backgroundColor: '#DDDD',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+    },
+    buttonContainer: {
+        flex: 1,
+        alignItems: 'flex-start',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        margin: 50,
+        marginTop: -50
+    },
+    sendButtonContainer: {
+
     }
 });
