@@ -27,8 +27,8 @@ function KakaoLogin({ navigation }) {
                         state._isUser = true;
                     }
 
-                    state._isUser ? 
-                    navigation.navigate("Second", {language: "english"}) : 
+                    // state._isUser ? 
+                    // navigation.navigate("Second", {language: "english"}) : 
                     navigation.navigate("Second", {email: profile.email, name: profile.nickname});
 
                     console.log(state._isUser)
@@ -42,10 +42,16 @@ function KakaoLogin({ navigation }) {
             console.log(err.message);
         }
     }
+
+    const testing = () => {
+        navigation.navigate('Third');
+    }
+
     return (
         <View style={styles.container}>
             <Image style={styles.loginLogo} source={imgPath} />
             <Button style={styles.loginButton} title='로그인' onPress={signInWithKakao} />
+            <Button title='testing' onPress={testing} />
         </View>
     )
 }
