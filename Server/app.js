@@ -11,6 +11,7 @@ const app = express();
 const Session = require('./config/sessionConn');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
+const detectRouter = require('./routes/detect')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,5 +28,6 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/detect', detectRouter);
 
 module.exports = app;
