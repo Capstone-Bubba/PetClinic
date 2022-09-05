@@ -9,7 +9,18 @@ const photo = multer.diskStorage({
     }
 });
 
-const uploadPhoto = multer({storage: photo});
+const uploadPhoto = multer({
+    storage: photo,
+    fileFilter : (req, file, cb) => {
+        if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+            cb(null, true);
+        } else {
+            req.fileValidationError = "jpg,jpeg,png,gif,webp 파일만 업로드 가능합니다.";
+            // cb({msg: '.png .jpg .jpeg 형식의 파일만 업로드 가능합니다.'}, false);
+            cb(null, false);
+        }
+    }
+});
 
 module.exports = {
     uploadPhoto

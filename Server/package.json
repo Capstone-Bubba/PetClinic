@@ -21,6 +21,9 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
     "passport": "^0.6.0",
-    "passport-kakao": "^1.0.1"
+    "passport-kakao": "^1.0.1",
+    "regenerator-runtime": "^0.13.9",
+    "tfjs": "^0.6.0",
+    "yolov5": "^1.0.11"
   }
 }

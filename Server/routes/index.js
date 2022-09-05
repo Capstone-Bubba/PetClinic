@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const uploadPhoto = require('../middleware/multer');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,9 +11,8 @@ router.post('/test', (req, res) => {
   res.send('asdasd');
 })
 
-router.post('/testing', uploadPhoto.uploadPhoto.single('images'), (req, res) => {
-  console.log(req.body);
-  res.send('asd');
-})
+// router.post('/testing', uploadPhoto.uploadPhoto.single('images'), (req, res) => {
+//   effiNet.effiNet(path.join(path.join(__dirname + '/../' + req.file.path)));
+// })
 
 module.exports = router;
