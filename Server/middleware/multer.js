@@ -12,7 +12,7 @@ const photo = multer.diskStorage({
 const uploadPhoto = multer({
     storage: photo,
     fileFilter : (req, file, cb) => {
-        if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg') {
+        if(file.mimetype === 'image/png' || file.mimetype === 'image/jpeg' || file.mimetype === 'image/jpg') {
             cb(null, true);
         } else {
             req.fileValidationError = "jpg,jpeg,png,gif,webp 파일만 업로드 가능합니다.";

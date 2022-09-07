@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SecondScreen from './Screen/secondScreen';
 import ThirdScreen from './Screen/thirdScreen';
+import AddressScreen from './Screen/addressScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name='Home' component={KakaoLogin} options={{title: "Welcome"}}/>
         <Stack.Screen name="Second" component={SecondScreen} />
         <Stack.Screen name="Third" component={ThirdScreen} />
+        <Stack.Screen name="Address" component={AddressScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
