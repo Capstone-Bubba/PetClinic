@@ -10,9 +10,8 @@ export default function ThirdScreen({ navigation }) {
     const [photo, setPhoto] = useState(imgPath);
     const [getOpacity, setOpacity] = useState(0);
     const [name, setName] = useState('');
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [btnStatus, setBtnStatus] = useState(false);
+    const [btnStatus, setBtnStatus] = useState(true);
+    const [part, setPart] = useState('');
 
     const showPicker = async () => {
         const grantedCamera = await PermissionsAndroid.request(
@@ -44,7 +43,9 @@ export default function ThirdScreen({ navigation }) {
 
             setPhoto({ uri: localUri });
             setName(imageName);
-            setShow(true);
+            setOpacity(1);
+            setBtnStatus(false);
+            console.log(btnStatus);
         } else {
             console.log("Camera permission denied");
         }
@@ -79,7 +80,8 @@ export default function ThirdScreen({ navigation }) {
             setPhoto({ uri: localUri });
             setName(imageName);
             setOpacity(1);
-            setBtnStatus(true);
+            setBtnStatus(false);
+            console.log(btnStatus);
         } else {
             console.log("Camera permission denied");
         }
@@ -87,22 +89,41 @@ export default function ThirdScreen({ navigation }) {
 
     const sendPhoto = async () => {
         try {
+            console.log(photo)
             const match = /\.(\w+)$/.exec(name ?? '');
             const type = match ? `image/${match[1]}` : `image`
             const formData = new FormData();
-            formData.append('images', { uri: photo.uri, name: name, type })
+            formData.append('images', { uri: photo.uri, name: name, type });
+            formData.append('part', part)
 
-            await axios({
-                method: 'post',
-                url: 'http://10.0.2.2:3000/detect/detecting',
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                },
-                data: formData
-            })
-                .then((response) => {
-                    console.log(response.data);
+            if (part.length !== 0) {
+                await axios.post('http://10.0.2.2:3000/detect/detecting', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
                 })
+                    .then((response) => {
+                        console.log(response.data);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                // await axios({
+                //     method: 'post',
+                //     url: 'http://10.0.2.2:3000/detect/detecting',
+                //     data: formData,
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data'
+                //     }
+                // })
+                //     
+            } else {
+                Alert.alert(
+                    '경고',
+                    '부위를 선택해주세요'
+                )
+            }
+
         } catch (err) {
             console.log(err);
         }
@@ -127,16 +148,16 @@ export default function ThirdScreen({ navigation }) {
                 </TouchableOpacity>
             </View>
             <View style={[styles.partBtnContainer, { opacity: getOpacity }]}>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus}>
+                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('head') }}>
                     <Text>머리</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus}>
+                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('abdomen') }}>
                     <Text>배</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus}>
+                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('foot') }}>
                     <Text>발</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus}>
+                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('crotch') }}>
                     <Text>사타구니</Text>
                 </TouchableOpacity>
             </View>

@@ -15,8 +15,8 @@ const checkUserID = (parameters) => {
 
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO userInfo (user_name, email, phone) VALUES (?, ?, ?)`;
-        db.query(queryData, [parameters.user_name, parameters.email, parameters.phone], (err, db_data) => {
+        let queryData = `INSERT INTO userInfo (user_name, email, phone, address) VALUES (?, ?, ?, ?)`;
+        db.query(queryData, [parameters.user_name, parameters.email, parameters.phone, parameters.address], (err, db_data) => {
             if (err) {
                 reject(err);
             } else {

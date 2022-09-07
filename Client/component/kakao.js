@@ -22,14 +22,15 @@ function KakaoLogin({ navigation }) {
 
             axios.post('http://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
                 .then((res) => {
-                    console.log(res.data)
-                    if(res.data.isUser !== 0) {
+                    console.log(res.data.isUser)
+                    if (res.data.isUser !== 0) {
                         state._isUser = true;
                     }
 
-                    // state._isUser ? 
-                    // navigation.navigate("Second", {language: "english"}) : 
-                    navigation.navigate("Second", {email: profile.email, name: profile.nickname});
+                    state._isUser ?
+                        navigation.navigate("Third") :
+                        navigation.navigate("Second", { email: profile.email, name: profile.nickname });
+                        // navigation.navigate("Second");
 
                     console.log(state._isUser)
                 })

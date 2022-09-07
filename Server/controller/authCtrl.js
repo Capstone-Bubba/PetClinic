@@ -19,10 +19,18 @@ const signUp = async (req, res) => {
         const parameters = {
             email: req.body.email,
             phone: req.body.phone,
-            user_name: req.body.name
+            user_name: req.body.name,
+            address: req.body.address
         }
+        console.log(parameters)
         const answer = await authDAO.insertUser(parameters);
-        res.send('1');
+
+        if(answer.affectedRows === 1) {
+            res.send('1');
+        } else {
+            console.log('No AffectedRows');
+        }
+        
     } catch(err) {
         console.log(err);
     }
