@@ -39,8 +39,22 @@ const checkUser = (parameters) => {
     })
 }
 
+const getAddr = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT address FROM userInfo WHERE email = ?`
+        db.query(query, parameters.email, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
-    checkUser
+    checkUser,
+    getAddr
 }
