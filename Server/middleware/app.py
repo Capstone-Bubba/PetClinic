@@ -28,6 +28,7 @@ def predict(imgPath, modelPath):
     result = output[0].tolist()
     idx = result.index(max(result))
     disease = ['구진 플라크', '비듬 각질 상피성 잔고리', '태선화 과다 색소 침착', '농포 여드름', '미란 궤양', '결절 종괴', '건강']
+    
     print(disease[idx])
     
 if __name__ == '__main__':
