@@ -1,10 +1,12 @@
-import { StyleSheet, Text, View, Button, Alert, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Image, AsyncS } from 'react-native';
 import React, { useState } from 'react';
 import {
     getProfile,
     login,
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const imgPath = require('../assets/login.png');
 
 function KakaoLogin({ navigation }) {
@@ -14,11 +16,24 @@ function KakaoLogin({ navigation }) {
         _isUser: false
     }
 
+    const storeData = async (accessToken, refreshToken, email) => {
+        try {
+            console.log(accessToken)
+            await AsyncStorage.setItem('accessToken', accessToken);
+            await AsyncStorage.setItem('refreshToken',refreshToken);
+            await AsyncStorage.setItem('email', email);
+            console.log('token saved');
+        } catch (err) {
+            console.log('token save error,', err);
+        }
+    }
+
     const signInWithKakao = async () => {
         try {
             const token = await login();
             const profile = await getProfile(token);
-            console.log(profile.nickname, profile.email, profile.birthday, token.accessToken);
+
+            storeData(token.accessToken, token.refreshToken, profile.email);
 
             axios.post('http://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
                 .then((res) => {
@@ -30,7 +45,7 @@ function KakaoLogin({ navigation }) {
                     state._isUser ?
                         navigation.navigate("Third") :
                         navigation.navigate("Second", { email: profile.email, name: profile.nickname });
-                        // navigation.navigate("Second");
+                    // navigation.navigate("Second");
 
                     console.log(state._isUser)
                 })

@@ -103,20 +103,18 @@ export default function ThirdScreen({ navigation }) {
                     }
                 })
                     .then((response) => {
-                        console.log(response.data);
+                        if(response.data === '건강') {
+                            Alert.alert(
+                                '발견된 문제가 없습니다'
+                            )
+                        } else {
+                            navigation.navigate('Result', {data: response.data, photo: photo})
+                            console.log(response.data)
+                        }
                     })
                     .catch((err) => {
                         console.log(err);
                     })
-                // await axios({
-                //     method: 'post',
-                //     url: 'http://10.0.2.2:3000/detect/detecting',
-                //     data: formData,
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data'
-                //     }
-                // })
-                //     
             } else {
                 Alert.alert(
                     '경고',
