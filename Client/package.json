@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@actbase/react-daum-postcode": "^1.0.4",
+    "@jiggag/react-native-kakao-maps": "^0.0.8",
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-native-seoul/kakao-login": "^4.2.2",
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
