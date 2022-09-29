@@ -9,11 +9,14 @@ const option = {
   apiKey: 'AIzaSyA4gWVk1uzNyqDXbV2cPjmrLVq2oIeb_es'
 }
 
-
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.send('index Page');
+router.get('/', (req, res) => {
+  res.render('auth/loginForm');
 });
+
+router.get('/main', function (req, res, next) {
+  res.render('main');
+})
 
 router.post('/test', (req, res) => {
   console.log(req.body);

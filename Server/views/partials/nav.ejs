@@ -1,0 +1,52 @@
+<!-- views/partials/nav.ejs -->
+<style>
+    header {
+        height: 75px;
+        padding: 1rem;
+        color: black;
+        background: white;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top : 0;
+        left : 0;
+        right : 0;
+    }
+
+    .logo{
+        flex: 1;
+    }
+
+    img {
+        height: 75px;
+        margin-right: auto;
+    }
+
+    nav{
+        flex : 0.3;
+        display : flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    nav span:nth-child(1){
+        margin-right:-18%;
+    }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<header>
+    <span class="logo">
+        <img src="/PetClinic_logo.ico" alt="">
+    </span>
+    <nav>
+        <span>
+            <img src="" onerror="this.src='/images/vet_thumbnail/error_profile.jpg'">
+        </span>
+        <span>
+            <p>이지원</p>
+        </span>
+        <span class="material-symbols-outlined">logout</span>
+    </nav>
+</header>

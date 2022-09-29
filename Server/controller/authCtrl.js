@@ -36,8 +36,20 @@ const signUp = async (req, res) => {
     }
 }
 
+// Web Controller
+
+const WebDetail = async (req, res) => {
+    const parameters = {
+        "email" : req.body.email,
+        "password" : req.body.password
+    }
+    console.log(parameters);
+    res.send('test');
+}
+
 module.exports = {
     sendResult,
     kakaoAppLogin,
-    signUp
+    signUp,
+    WebDetail
 }

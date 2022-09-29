@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://kit.fontawesome.com/51db22a717.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-container">
+        <div class="login-form-container shadow">
+            <div class="login-form-right-side">
+                <div class="top-logo-wrap">
+                </div>
+                <h1>PetClinic Doctor Page</h1>
+                <p style="color: black">PetClinic 웹/앱의 수의사 전용 페이지로 화상 통화, 고객 관리, 회원 정보 수정, 병원 등록 등 다양한 기능을 활용할 수 있습니다.</p>
+            </div>
+            <div class="login-form-left-side">
+                <div class="login-top-wrap">
+                    <span>Don't have an account?</span>
+                    <button class="create-account-btn" onClick="location.href='/auth/signup'">Create Profile</button>
+                </div>
+            <form action="/auth/detail" method="post">
+                <div class="login-input-container">
+                    <div class="login-input-wrap input-id">
+                        <i class="far fa-envelope" style="color:#AFD485;"></i>
+                        <input placeholder="Email" type="text" name="email" required>
+                    </div>
+                    <div class="login-input-wrap input-password">
+                        <i class="fas fa-key" style="color:#AFD485;"></i>
+                        <input placeholder="Password" type="password" name="password" required>
+                    </div>
+                </div>
+                <div class="login-btn-wrap">
+                    <button class="login-btn" type="submit">Login</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
