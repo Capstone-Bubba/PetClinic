@@ -1,0 +1,9 @@
+CropDataset/
+Dataset/
+무증상/
+유증상/
+Crop-petData.ipynb
+train_EfficientNet.ipynb
+EffcientNet/result/
+*.ipynb_checkpoints/
+*/*.ipynb_checkpoints/
