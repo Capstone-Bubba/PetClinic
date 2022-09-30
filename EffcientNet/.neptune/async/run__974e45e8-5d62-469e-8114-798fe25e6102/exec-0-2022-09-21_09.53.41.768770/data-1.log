@@ -1,0 +1,206 @@
+{"obj": {"type": "AssignString", "path": ["sys", "name"], "value": "Untitled"}, "version": 1}
+{"obj": {"type": "AssignString", "path": ["sys", "description"], "value": ""}, "version": 2}
+{"obj": {"type": "AssignString", "path": ["sys", "hostname"], "value": "twogudack-OMEN-by-HP-Obelisk-Desktop-875-1xxx"}, "version": 3}
+{"obj": {"type": "AssignBool", "path": ["sys", "failed"], "value": false}, "version": 4}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stdout"]}, "version": 5}
+{"obj": {"type": "ClearStringLog", "path": ["monitoring", "stderr"]}, "version": 6}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "cpu"], "min": 0.0, "max": 100.0, "unit": "%"}, "version": 7}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "cpu"]}, "version": 8}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "memory"], "min": 0.0, "max": 15.507919311523438, "unit": "GB"}, "version": 9}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "memory"]}, "version": 10}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "gpu"], "min": 0.0, "max": 100.0, "unit": "%"}, "version": 11}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "gpu"]}, "version": 12}
+{"obj": {"type": "ConfigFloatSeries", "path": ["monitoring", "gpu_memory"], "min": 0.0, "max": 23.6307373046875, "unit": "GB"}, "version": 13}
+{"obj": {"type": "ClearFloatLog", "path": ["monitoring", "gpu_memory"]}, "version": 14}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Remember to stop your run once you\u2019ve finished logging your metadata (https://docs.neptune.ai/api-reference/run#.stop). It will be stopped automatically only when the notebook kernel/interactive console is terminated.\n", "step": null, "ts": 1663721622.7569127}]}, "version": 15}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 3.7, "step": null, "ts": 1663721622.7551682}]}, "version": 16}
+{"obj": {"type": "AssignString", "path": ["parameters", "data_path"], "value": "../Dataset"}, "version": 17}
+{"obj": {"type": "AssignString", "path": ["parameters", "file_name"], "value": "region_A.csv"}, "version": 18}
+{"obj": {"type": "AssignInt", "path": ["parameters", "fold"], "value": 0}, "version": 19}
+{"obj": {"type": "AssignInt", "path": ["parameters", "Kfold"], "value": 5}, "version": 20}
+{"obj": {"type": "AssignString", "path": ["parameters", "tag"], "value": "PetFriends"}, "version": 21}
+{"obj": {"type": "AssignString", "path": ["parameters", "model_type"], "value": ""}, "version": 22}
+{"obj": {"type": "AssignString", "path": ["parameters", "encoder_name"], "value": "efficientnet_b4"}, "version": 23}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "drop_path_rate"], "value": 0.2}, "version": 24}
+{"obj": {"type": "AssignInt", "path": ["parameters", "num_classes"], "value": 7}, "version": 25}
+{"obj": {"type": "AssignInt", "path": ["parameters", "epochs"], "value": 100}, "version": 26}
+{"obj": {"type": "AssignInt", "path": ["parameters", "img_size"], "value": 312}, "version": 27}
+{"obj": {"type": "AssignInt", "path": ["parameters", "batch_size"], "value": 16}, "version": 28}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "initial_lr"], "value": 1e-06}, "version": 29}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "weight_decay"], "value": 1e-05}, "version": 30}
+{"obj": {"type": "AssignInt", "path": ["parameters", "aug_ver"], "value": 11}, "version": 31}
+{"obj": {"type": "AssignInt", "path": ["parameters", "warm_epoch"], "value": 3}, "version": 32}
+{"obj": {"type": "AssignFloat", "path": ["parameters", "max_lr"], "value": 0.0001}, "version": 33}
+{"obj": {"type": "AssignInt", "path": ["parameters", "patience"], "value": 15}, "version": 34}
+{"obj": {"type": "AssignBool", "path": ["parameters", "use_aug"], "value": false}, "version": 35}
+{"obj": {"type": "AssignBool", "path": ["parameters", "logging"], "value": true}, "version": 36}
+{"obj": {"type": "AssignInt", "path": ["parameters", "num_workers"], "value": 4}, "version": 37}
+{"obj": {"type": "AssignInt", "path": ["parameters", "seed"], "value": 42}, "version": 38}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 7.889347076416016, "step": null, "ts": 1663721622.7551682}]}, "version": 39}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 1.0, "step": null, "ts": 1663721622.7551682}]}, "version": 40}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 5.93017578125, "step": null, "ts": 1663721622.7551682}]}, "version": 41}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\ub370\uc774\ud130\uc14b \uc0dd\uc131 \uc644\ub8cc,,\n \ub370\uc774\ud130\uc14b \uc0ac\uc774\uc988 : 8260", "step": null, "ts": 1663721622.7764652}]}, "version": 42}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1663721622.7765985}]}, "version": 43}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\ub370\uc774\ud130\uc14b \uc0dd\uc131 \uc644\ub8cc,,\n \ub370\uc774\ud130\uc14b \uc0ac\uc774\uc988 : 2065", "step": null, "ts": 1663721622.77703}]}, "version": 44}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1663721622.7771866}]}, "version": 45}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Macs : 3.02 GMac", "step": null, "ts": 1663721623.134601}]}, "version": 46}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1663721623.1347392}]}, "version": 47}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "params : ['17.56 M']", "step": null, "ts": 1663721623.1348546}]}, "version": 48}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "\n", "step": null, "ts": 1663721623.135149}]}, "version": 49}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  0%|                                                   | 0/517 [00:00<?, ?it/s]", "step": null, "ts": 1663721623.1379685}]}, "version": 50}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Unexpected error occurred in Neptune background thread: Killing Neptune asynchronous thread. All data is safe on disk and can be later synced manually using `neptune sync` command.\n", "step": null, "ts": 1663721623.7553174}]}, "version": 51}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Exception in thread ", "step": null, "ts": 1663721623.7564454}]}, "version": 52}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "NeptuneAsyncOpProcessor", "step": null, "ts": 1663721623.7569733}]}, "version": 53}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ":\n", "step": null, "ts": 1663721623.758806}]}, "version": 54}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1663721623.7589731}]}, "version": 55}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 335, in unmarshal_response\n", "step": null, "ts": 1663721623.7590923}]}, "version": 56}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7595758}]}, "version": 57}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "incoming_response.swagger_result = unmarshal_response_inner(  # type: ignore", "step": null, "ts": 1663721623.7596917}]}, "version": 58}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.759922}]}, "version": 59}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 370, in unmarshal_response_inner\n", "step": null, "ts": 1663721623.760045}]}, "version": 60}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7602663}]}, "version": 61}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "response_spec = get_response_spec(status_code=response.status_code, op=op)", "step": null, "ts": 1663721623.7605114}]}, "version": 62}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.76065}]}, "version": 63}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado_core/response.py\", line 157, in get_response_spec\n", "step": null, "ts": 1663721623.760845}]}, "version": 64}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7610202}]}, "version": 65}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "raise MatchingResponseNotFound(", "step": null, "ts": 1663721623.7611272}]}, "version": 66}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7613394}]}, "version": 67}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "bravado_core.exception", "step": null, "ts": 1663721623.7614923}]}, "version": 68}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ".", "step": null, "ts": 1663721623.7616293}]}, "version": 69}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "MatchingResponseNotFound", "step": null, "ts": 1663721623.7617307}]}, "version": 70}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ": ", "step": null, "ts": 1663721623.7618937}]}, "version": 71}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Response specification matching http status_code 402 not found for operation Operation(executeOperations). Either add a response specification for the status_code or use a `default` response.", "step": null, "ts": 1663721623.762027}]}, "version": 72}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7621548}]}, "version": 73}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\nDuring handling of the above exception, another exception occurred:\n\n", "step": null, "ts": 1663721623.7622867}]}, "version": 74}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1663721623.7624292}]}, "version": 75}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/swagger_client_wrapper.py\", line 83, in __call__\n", "step": null, "ts": 1663721623.7626007}]}, "version": 76}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7628107}]}, "version": 77}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return FinishedApiResponseFuture(future.response())  # wait synchronously", "step": null, "ts": 1663721623.7636847}]}, "version": 78}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.763882}]}, "version": 79}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 200, in response\n", "step": null, "ts": 1663721623.7640736}]}, "version": 80}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7643406}]}, "version": 81}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "swagger_result = self._get_swagger_result(incoming_response)", "step": null, "ts": 1663721623.7645137}]}, "version": 82}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7646856}]}, "version": 83}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 124, in wrapper\n", "step": null, "ts": 1663721623.7648578}]}, "version": 84}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7650752}]}, "version": 85}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return func(self, *args, **kwargs)", "step": null, "ts": 1663721623.7652423}]}, "version": 86}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7654064}]}, "version": 87}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 300, in _get_swagger_result\n", "step": null, "ts": 1663721623.7655938}]}, "version": 88}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.765837}]}, "version": 89}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "unmarshal_response(", "step": null, "ts": 1663721623.766007}]}, "version": 90}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7661717}]}, "version": 91}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 344, in unmarshal_response\n", "step": null, "ts": 1663721623.7663393}]}, "version": 92}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.766598}]}, "version": 93}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "six.reraise(", "step": null, "ts": 1663721623.766765}]}, "version": 94}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.766939}]}, "version": 95}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/six.py\", line 718, in reraise\n", "step": null, "ts": 1663721623.7671204}]}, "version": 96}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7674267}]}, "version": 97}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "raise value.with_traceback(tb)", "step": null, "ts": 1663721623.7676036}]}, "version": 98}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7677734}]}, "version": 99}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 335, in unmarshal_response\n", "step": null, "ts": 1663721623.7679496}]}, "version": 100}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7681937}]}, "version": 101}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "incoming_response.swagger_result = unmarshal_response_inner(  # type: ignore", "step": null, "ts": 1663721623.7683604}]}, "version": 102}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.768547}]}, "version": 103}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado/http_future.py\", line 370, in unmarshal_response_inner\n", "step": null, "ts": 1663721623.768719}]}, "version": 104}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7689774}]}, "version": 105}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "response_spec = get_response_spec(status_code=response.status_code, op=op)", "step": null, "ts": 1663721623.769162}]}, "version": 106}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7693284}]}, "version": 107}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/bravado_core/response.py\", line 157, in get_response_spec\n", "step": null, "ts": 1663721623.769497}]}, "version": 108}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7704132}]}, "version": 109}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "raise MatchingResponseNotFound(", "step": null, "ts": 1663721623.7706451}]}, "version": 110}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7708275}]}, "version": 111}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "bravado.exception", "step": null, "ts": 1663721623.7710075}]}, "version": 112}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ".", "step": null, "ts": 1663721623.7711742}]}, "version": 113}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "HTTPPaymentRequired", "step": null, "ts": 1663721623.7713413}]}, "version": 114}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ": ", "step": null, "ts": 1663721623.771714}]}, "version": 115}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "402 : Response specification matching http status_code 402 not found for operation Operation(executeOperations). Either add a response specification for the status_code or use a `default` response.", "step": null, "ts": 1663721623.7719066}]}, "version": 116}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7720997}]}, "version": 117}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\nThe above exception was the direct cause of the following exception:\n\n", "step": null, "ts": 1663721623.7722428}]}, "version": 118}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "Traceback (most recent call last):\n", "step": null, "ts": 1663721623.772413}]}, "version": 119}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/threading.py\", line 932, in _bootstrap_inner\n", "step": null, "ts": 1663721623.7725785}]}, "version": 120}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7730596}]}, "version": 121}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.run()", "step": null, "ts": 1663721623.7731996}]}, "version": 122}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7733521}]}, "version": 123}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/threading/daemon.py\", line 51, in run\n", "step": null, "ts": 1663721623.7735674}]}, "version": 124}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7738533}]}, "version": 125}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.work()", "step": null, "ts": 1663721623.7740498}]}, "version": 126}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7742345}]}, "version": 127}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/operation_processors/async_operation_processor.py\", line 202, in work\n", "step": null, "ts": 1663721623.774435}]}, "version": 128}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7747395}]}, "version": 129}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.process_batch(batch, version)", "step": null, "ts": 1663721623.7749445}]}, "version": 130}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7751489}]}, "version": 131}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/threading/daemon.py\", line 75, in wrapper\n", "step": null, "ts": 1663721623.7753634}]}, "version": 132}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7756245}]}, "version": 133}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "result = func(self_, *args, **kwargs)", "step": null, "ts": 1663721623.775781}]}, "version": 134}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.776092}]}, "version": 135}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/operation_processors/async_operation_processor.py\", line 215, in process_batch\n", "step": null, "ts": 1663721623.7763662}]}, "version": 136}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7768497}]}, "version": 137}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "processed_count, errors = self._processor._backend.execute_operations(", "step": null, "ts": 1663721623.777155}]}, "version": 138}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7775426}]}, "version": 139}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/hosted_neptune_backend.py\", line 477, in execute_operations\n", "step": null, "ts": 1663721623.7777445}]}, "version": 140}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7781434}]}, "version": 141}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self._execute_operations(", "step": null, "ts": 1663721623.7782576}]}, "version": 142}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7784376}]}, "version": 143}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/utils.py\", line 90, in wrapper\n", "step": null, "ts": 1663721623.7785816}]}, "version": 144}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7787778}]}, "version": 145}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "return func(*args, **kwargs)", "step": null, "ts": 1663721623.7789068}]}, "version": 146}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7790358}]}, "version": 147}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/hosted_neptune_backend.py\", line 634, in _execute_operations\n", "step": null, "ts": 1663721623.7791982}]}, "version": 148}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7794366}]}, "version": 149}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "result = self.leaderboard_client.api.executeOperations(**kwargs).response().result", "step": null, "ts": 1663721623.7795682}]}, "version": 150}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7796962}]}, "version": 151}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/swagger_client_wrapper.py\", line 85, in __call__\n", "step": null, "ts": 1663721623.7798507}]}, "version": 152}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7800348}]}, "version": 153}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "self.handle_neptune_http_errors(e.response, exception=e)", "step": null, "ts": 1663721623.7801867}]}, "version": 154}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7803183}]}, "version": 155}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "  File \"/home/twogudack/anaconda3/envs/pytorch/lib/python3.8/site-packages/neptune/new/internal/backends/swagger_client_wrapper.py\", line 54, in handle_neptune_http_errors\n", "step": null, "ts": 1663721623.7804496}]}, "version": 156}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "    ", "step": null, "ts": 1663721623.7806206}]}, "version": 157}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "raise NeptuneLimitExceedException(", "step": null, "ts": 1663721623.780773}]}, "version": 158}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7809072}]}, "version": 159}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "neptune.new.exceptions", "step": null, "ts": 1663721623.7810419}]}, "version": 160}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ".", "step": null, "ts": 1663721623.781169}]}, "version": 161}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "NeptuneLimitExceedException", "step": null, "ts": 1663721623.7812965}]}, "version": 162}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": ": ", "step": null, "ts": 1663721623.7820928}]}, "version": 163}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n\u001b[95m\n----NeptuneLimitExceedException---------------------------------------------------------------------------------------\n\u001b[0m\nWorkspace in readonly state. Reasons: monitoring time limit is exceeded\n\nIt's not possible to upload new data, but you can still fetch and delete data.\nIf you are using asynchronous (default) connection mode, Neptune automatically switched to offline mode\nand your data is being stored safely on the disk. You can upload it later using the Neptune Command Line Interface tool:\n    \u001b[95mneptune sync -p project_name\u001b[0m\nWhat should I do?\n    - In case of storage limitations, go to your projects and remove runs or model metadata you don't need\n    - ... or update your subscription plan here: https://app.neptune.ai/-/subscription\nYou may also want to check the following docs page:\n    - https://docs.neptune.ai/advanced-user-guides/connection-modes\n\u001b[92mNeed help?\u001b[0m-> https://docs.neptune.ai/getting-started/getting-help\n", "step": null, "ts": 1663721623.7824411}]}, "version": 164}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721623.7826164}]}, "version": 165}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  0%|                                           | 1/517 [00:00<07:47,  1.10it/s]", "step": null, "ts": 1663721624.0446715}]}, "version": 166}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  0%|\u258f                                          | 2/517 [00:01<04:16,  2.01it/s]", "step": null, "ts": 1663721624.2562623}]}, "version": 167}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  1%|\u258f                                          | 3/517 [00:01<03:35,  2.39it/s]", "step": null, "ts": 1663721624.5818744}]}, "version": 168}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  1%|\u258e                                          | 4/517 [00:01<03:20,  2.55it/s]", "step": null, "ts": 1663721624.9317708}]}, "version": 169}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  1%|\u258d                                          | 5/517 [00:02<03:12,  2.66it/s]", "step": null, "ts": 1663721625.2804708}]}, "version": 170}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  1%|\u258d                                          | 6/517 [00:02<03:08,  2.72it/s]", "step": null, "ts": 1663721625.6331358}]}, "version": 171}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  1%|\u258c                                          | 7/517 [00:02<03:02,  2.79it/s]", "step": null, "ts": 1663721625.9722428}]}, "version": 172}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  2%|\u258b                                          | 8/517 [00:03<02:59,  2.83it/s]", "step": null, "ts": 1663721626.31262}]}, "version": 173}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  2%|\u258b                                          | 9/517 [00:03<02:58,  2.85it/s]", "step": null, "ts": 1663721626.6585777}]}, "version": 174}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  2%|\u258a                                         | 10/517 [00:03<02:55,  2.88it/s]", "step": null, "ts": 1663721626.9976451}]}, "version": 175}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  2%|\u2589                                         | 11/517 [00:04<02:54,  2.90it/s]", "step": null, "ts": 1663721627.3386412}]}, "version": 176}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  2%|\u2589                                         | 12/517 [00:04<02:54,  2.90it/s]", "step": null, "ts": 1663721627.6844308}]}, "version": 177}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  3%|\u2588                                         | 13/517 [00:04<02:53,  2.90it/s]", "step": null, "ts": 1663721628.028064}]}, "version": 178}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "", "step": null, "ts": 1663721628.241196}]}, "version": 179}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\r  3%|\u2588                                         | 13/517 [00:05<03:17,  2.55it/s]", "step": null, "ts": 1663721628.241611}]}, "version": 180}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stderr"], "values": [{"value": "\n", "step": null, "ts": 1663721628.2421978}]}, "version": 181}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 9.4, "step": null, "ts": 1663721632.7599955}]}, "version": 182}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 8.028121948242188, "step": null, "ts": 1663721632.7599955}]}, "version": 183}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 10.0, "step": null, "ts": 1663721632.7599955}]}, "version": 184}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 6.028564453125, "step": null, "ts": 1663721632.7599955}]}, "version": 185}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 6.7, "step": null, "ts": 1663721642.761194}]}, "version": 186}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 8.014453887939453, "step": null, "ts": 1663721642.761194}]}, "version": 187}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 7.0, "step": null, "ts": 1663721642.761194}]}, "version": 188}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 6.0225830078125, "step": null, "ts": 1663721642.761194}]}, "version": 189}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 6.3, "step": null, "ts": 1663721652.7646236}]}, "version": 190}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 8.086971282958984, "step": null, "ts": 1663721652.7646236}]}, "version": 191}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 7.0, "step": null, "ts": 1663721652.7646236}]}, "version": 192}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 6.05438232421875, "step": null, "ts": 1663721652.7646236}]}, "version": 193}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 8.6, "step": null, "ts": 1663721662.7678359}]}, "version": 194}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 8.234611511230469, "step": null, "ts": 1663721662.7678359}]}, "version": 195}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 28.0, "step": null, "ts": 1663721662.7678359}]}, "version": 196}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 6.04071044921875, "step": null, "ts": 1663721662.7678359}]}, "version": 197}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 7.3, "step": null, "ts": 1663721672.7711976}]}, "version": 198}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 8.250446319580078, "step": null, "ts": 1663721672.7711976}]}, "version": 199}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 11.0, "step": null, "ts": 1663721672.7711976}]}, "version": 200}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 6.07177734375, "step": null, "ts": 1663721672.7711976}]}, "version": 201}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "cpu"], "values": [{"value": 7.0, "step": null, "ts": 1663721682.774598}]}, "version": 202}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "memory"], "values": [{"value": 7.319622039794922, "step": null, "ts": 1663721682.774598}]}, "version": 203}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu"], "values": [{"value": 2.0, "step": null, "ts": 1663721682.774598}]}, "version": 204}
+{"obj": {"type": "LogFloats", "path": ["monitoring", "gpu_memory"], "values": [{"value": 5.87799072265625, "step": null, "ts": 1663721682.774598}]}, "version": 205}
+{"obj": {"type": "LogStrings", "path": ["monitoring", "stdout"], "values": [{"value": "Shutting down background jobs, please wait a moment...\n", "step": null, "ts": 1663721689.207417}]}, "version": 206}
