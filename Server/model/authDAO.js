@@ -56,5 +56,5 @@ module.exports = {
     checkUserID,
     insertUser,
     checkUser,
-    getAddr
+    getAddr,
 }

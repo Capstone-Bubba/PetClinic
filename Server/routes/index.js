@@ -14,8 +14,8 @@ router.get('/', (req, res) => {
   res.render('auth/loginForm');
 });
 
-router.get('/main', function (req, res, next) {
-  res.render('main');
+router.get('/mypage', (req, res) => {
+  res.render('main/mypage');
 })
 
 router.post('/test', (req, res) => {

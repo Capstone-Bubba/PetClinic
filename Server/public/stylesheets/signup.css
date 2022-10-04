@@ -1,3 +1,101 @@
+body {
+    background: #E4E9F7;
+}
+
 .signup-container{
     padding-top : 100px;
 }
+
+.total-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input {
+    width: 40%; 
+    padding: 10px 20px; 
+    margin: 5px 0; 
+    box-sizing: border-box; 
+}
+
+.search-address-form{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    width : 610px;
+    padding-bottom: 20px;
+}
+
+.search-address-form input{
+    width: 100%; 
+    padding: 10px 20px; 
+    box-sizing: border-box; 
+}
+
+.file-form {
+    display : flex;
+    align-items: center;
+    border: 1px solid;
+    height: 150px;
+    width : 110px;
+    margin : 20px;
+    justify-content : space-around;
+}
+
+.input-file-button {
+    text-align: center;
+}
+
+.user-form {
+    padding-top : 20px;
+    display : flex;
+    flex-direction: row;
+}
+
+.name-form {
+    display : flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 20px;
+    width: 460px;
+}
+/* 
+.email-form {
+    display:flex;
+    flex-direction: row;
+    text-align: left;
+} */
+
+.name-form label, .detail-form label{
+    flex-grow:1;
+    width: 60px;
+}
+
+.name-form input{
+    flex-grow:5;
+}
+
+.name-form div {
+    display: flex;
+    flex-grow : 1;
+    align-items: center;
+}
+
+.detail-form div{
+    display:flex;
+    align-items: center;
+}
+
+.detail-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin:20px;
+    width : 600px;
+}
+
+.detail-form input, .detail-form textarea{
+    flex-grow: 8;
+}
+

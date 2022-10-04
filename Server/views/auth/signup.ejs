@@ -7,61 +7,91 @@
     <link rel="stylesheet" href="/stylesheets/signup.css">
     <title>Document</title>
 </head>
-<%- include('../partials/nav') %>
 <body>
     <div class="signup-container">
-        <form action="" id="total-form">
-            <label class="input-file-button" for="avatar">사진 입력</label>
-            <input type="file" id="avatar" name="avatar" style="display:none;" accept="image/png, image/jpg, image/jpeg">
-            <input type="text" id="nickname" name="nickname" placeholder="이름">
-            <input type="tel" id="telephone" name="telephone" placeholder="010-xxxx-xxxx">
-            <form name="form">
+        <form action="/auth/signup" class="total-form" name="form" method="post">
+            <div>
+                <h1>회원가입 페이지</h1>
+            </div>
+            <div class="user-form">
+                <div class="file-form" style="background:white;">
+                    <label class="input-file-button" for="avatar" style="cursor:pointer; ">
+                        <img id="preview" src="" alt="사진 입력" style="width:100%;">
+                    </label>
+                    <input type="file" id="avatar" name="avatar" style="display:none; padding:0%;" accept="ima ge/png, image/jpg, image/jpeg">
+                </div>
+                <div class="name-form">
+                    <div class="nickname-form">
+                        <label for="nickname" class="input-nickname">이름</label>
+                        <input type="text" id="nickname" name="nickname" placeholder="이름">
+                    </div>
+                    <div class="tel-form">
+                        <label for="tel" class="input-tel">전화번호</label>
+                        <input type="tel" id="telephone" name="telephone" placeholder="010-xxxx-xxxx">
+                    </div>
+                    <div class="gender-form">
+                        <label for="">성별</label>
+                        <input type="radio" name="gender" value="man" checked>남
+                        <input type="radio" name="gender" value="man" >여
+                    </div>
+                </div>
+            </div>
+            <div class="detail-form">
+                <div class="email-form">
+                    <label for="email" class="input-email">E-mail</label>
+                    <input type="email" name="email" placeholder="asd123@google.com">
+                </div>
+                <div class="password-form">
+                    <label for="password">비밀번호</label>
+                    <input type="password" name="password" id="password" placeholder="12자리 이상" onchange="check_pass()">
+                </div>
+                <div class="repeat-passwowrd-form">
+                    <label for="repeat-passwowrd">재입력</label>
+                    <input type="password" name="repeat-passwowrd" id="repeat-password" placeholder="비밀번호 재입력" onchange="check_pass()">
+                </div>
+                <span id="check-password">&#10003;</span>
+                <div class="rank-form">
+                    <label for="rank">직급</label>
+                    <input type="text" name="rank" placeholder="원장">
+                </div>
+                <div class="hospital-form">
+                    <label for="hospital">병원</label>
+                    <input type="text" name="hospital" placeholder="솔봄동물병원">
+                </div>
+                <div class="major-form">
+                    <label for="major" class="input-tel">전공</label>
+                    <input type="tel" id="major" name="major" placeholder="수의학과">
+                </div>
+                <div class="career-form">
+                    <label for="career">경력 사항</label>
+                    <textarea name="career" id="career" cols="30" rows="10" placeholder="300제한"></textarea>
+                </div>
+                <input type="hidden" name="role" value=1 />
+            </div>
+            <!-- <div class="search-address-form">
+                <input type="button" value="병원 주소 검색" onclick="goPopup()" style="cursor:pointer" />
                 <input name="roadAddrPart1" type="text" placeholder="도로명주소" />
                 <input name="addrDetail" type="text" placeholder="고객입력 상세주소" />
                 <input name="zipNo" type="text" placeholder="우편번호" />
-                <input type="button" value="주소검색" onclick="goPopup()" />
-            </form>
+            </div> -->
+            <button type="submit">회원 가입</button>
         </form>
       </div>
       <script language="javascript">
-        function goPopup() {
-          var pop = window.open(
-            '/auth/address/Popup',
-            'pop',
-            'width=570,height=420, scrollbars=yes, resizable=yes'
-          );
-        }
-        function jusoCallBack(
-          roadFullAddr,
-          roadAddrPart1,
-          addrDetail,
-          roadAddrPart2,
-          engAddr,
-          jibunAddr,
-          zipNo,
-          admCd,
-          rnMgtSn,
-          bdMgtSn,
-          detBdNmList,
-          bdNm,
-          bdKdcd,
-          siNm,
-          sggNm,
-          emdNm,
-          liNm,
-          rn,
-          udrtYn,
-          buldMnnm,
-          buldSlno,
-          mtYn,
-          lnbrMnnm,
-          lnbrSlno,
-          emdNo
-        ) {
-          // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다
-          document.form.roadAddrPart1.value = roadAddrPart1;
-          document.form.addrDetail.value = addrDetail;
-          document.form.zipNo.value = zipNo;
+        avatar.onchange = evt => {
+            const [file] = avatar.files
+            if (file) {
+                preview.src = URL.createObjectURL(file)
+                console.log(preview.src)
+            }
+            }
+
+        function check_pass() {
+            if(document.getElementById('password').value == document.getElementById('repeat-password').value){
+                document.getElementById('check-password').style.color = 'green'
+            } else {
+                document.getElementById('check-password').style.color = 'red'
+            }
         }
       </script>
 </body>

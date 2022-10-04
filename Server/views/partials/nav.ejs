@@ -4,7 +4,6 @@
         height: 75px;
         padding: 1rem;
         color: black;
-        background: white;
         font-weight: bold;
         display: flex;
         justify-content: space-between;
@@ -19,8 +18,15 @@
         flex: 1;
     }
 
-    img {
-        height: 75px;
+    .logo-img {
+        width: 350px;
+        height: 180px;
+        margin-left: -100px;
+    }
+
+    img{
+        width: 350px;
+        height: 180px;
         margin-right: auto;
     }
 
@@ -34,19 +40,45 @@
     nav span:nth-child(1){
         margin-right:-18%;
     }
+
+    .logout-btn, .user-btn {
+        border:0; 
+        outline:0; 
+        background-color: white;
+        cursor: pointer;
+    }
+
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <header>
     <span class="logo">
-        <img src="/PetClinic_logo.ico" alt="">
+        <img src="/petlogo.ico" alt="" class="logo-img">
     </span>
     <nav>
         <span>
-            <img src="" onerror="this.src='/images/vet_thumbnail/error_profile.jpg'">
+            <img src="" onerror="this.src='/images/vet_thumbnail/error_profile.png'">
         </span>
-        <span>
-            <p>이지원</p>
-        </span>
-        <span class="material-symbols-outlined">logout</span>
+        <button onclick="goMain()" class="user-btn" style="background:none;">
+            <p >이지원</p>
+        </button>
+        <button class="logout-btn" style="background:none;">
+            <span class="material-symbols-outlined" onclick="logout()">logout</span>
+        </button>
     </nav>
 </header>
+<script type="text/javascript">
+    function logout() {
+        var result = confirm('로그아웃 하시겠습니까?');
+        if(result) {
+            alert('로그아웃 성공');
+        }
+    }
+    
+    function goMain() {
+        // user 정보가 있으면 
+        // location.href = "/main"
+
+        // user 정보가 없으면
+        location.href = "/"
+    }
+</script>

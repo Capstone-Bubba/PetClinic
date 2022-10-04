@@ -17,6 +17,34 @@ const getNearHospital = (parameters) => {
     })
 }
 
+const Create_Hospital = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `Insert INTO hospital SET ?`;
+        db.query(queryData, parameters, (err, db_data) => {
+            if(err){
+                reject(err);
+            } else{
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const Check_Hospital = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT EXISTS(SELECT h_num FROM hospital WHERE h_zipNo = ?) AS exist`;
+        db.query(queryData, parameters, (err, db_data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+      })
+    })
+};
+
 module.exports = {
-    getNearHospital
+    getNearHospital,
+    Create_Hospital,
+    Check_Hospital,
 }
