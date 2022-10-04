@@ -40,6 +40,7 @@ router.post('/address/Popup', (req, res) => {
 });
 
 router.get('/hospital', (req, res) => {
+    // role 체크 이후 만약 관리자가 아니라면 권한 접근 오류 alert
     res.render('auth/hospitalForm');
 })
 

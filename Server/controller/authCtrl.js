@@ -42,9 +42,29 @@ const signUp = async (req, res) => {
 const WebSignup = async (req, res) => {
     try{
         const parameters = {
-            
+            user_name : req.body.nickname,
+            role : req.body.role,
+            email : req.body.email,
+            phone : req.body.telephone,
+            birth : req.body.birth,
+            address : null,
+            password : req.body.password,
+        };
+        console.log(parameters);
+        const data = await authDAO.checkUser(parameters);
+        if(data[0].isUser == 1){
+            res.render('alert', {result : '이미 존재하는 아이디입니다.'});
         }
-        res.send(req.body);
+        else {
+            const answer = await authDAO.insertUser(parameters);
+            console.log('affected' , answer.affectedRows);
+            if(answer.affectedRows === 1) {
+                res.render('alert', {result : '회원가입 완료'});
+            } else {
+                res.render('alert', {result : '알수없는 오류'});
+                console.log('No AffectedRows');
+            }
+        }
     } catch(err) {
         console.log(err);
     }
