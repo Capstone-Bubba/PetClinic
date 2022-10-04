@@ -52,6 +52,7 @@ const WebSignup = async (req, res) => {
         };
         console.log(parameters);
         const data = await authDAO.checkUser(parameters);
+        // 병원 Check
         if(data[0].isUser == 1){
             res.render('alert', {result : '이미 존재하는 아이디입니다.'});
         }
@@ -61,11 +62,12 @@ const WebSignup = async (req, res) => {
             if(answer.affectedRows === 1) {
                 res.render('alert', {result : '회원가입 완료'});
             } else {
-                res.render('alert', {result : '알수없는 오류'});
+                res.render('alert', {result : '입력값이 잘못되었습니다.'});
                 console.log('No AffectedRows');
             }
         }
     } catch(err) {
+        res.render('alert', {result : '필수 항목을 입력해주세요'})
         console.log(err);
     }
 }
