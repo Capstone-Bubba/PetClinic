@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/signup.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="signup-container">
+        <form action="/auth/signup" class="total-form" name="form" method="post">
+            <div>
+                <h1>회원가입 페이지</h1>
+            </div>
+            <div class="user-form">
+                <div class="file-form" style="background:white;">
+                    <label class="input-file-button" for="avatar" style="cursor:pointer; ">
+                        <img id="preview" src="" alt="사진 입력" style="width:100%;">
+                    </label>
+                    <input type="file" id="avatar" name="avatar" style="display:none; padding:0%;" accept="ima ge/png, image/jpg, image/jpeg">
+                </div>
+                <div class="name-form">
+                    <div class="nickname-form">
+                        <label for="nickname" class="input-nickname">이름</label>
+                        <input type="text" id="nickname" name="nickname" placeholder="이름">
+                    </div>
+                    <div class="tel-form">
+                        <label for="tel" class="input-tel">전화번호</label>
+                        <input type="tel" id="telephone" name="telephone" placeholder="010-xxxx-xxxx">
+                    </div>
+                    <div class="gender-form">
+                        <label for="inline-tel">내선번호</label>
+                        <input type="tel" id="telephone" name="hospital-phone" placeholder="031-xxx-xxxx">
+                    </div>
+                </div>
+            </div>
+            <div class="detail-form">
+                <div class="email-form">
+                    <label for="email" class="input-email">E-mail</label>
+                    <input type="email" name="email" placeholder="asd123@google.com">
+                </div>
+                <div class="password-form">
+                    <label for="password">비밀번호</label>
+                    <input type="password" name="password" id="password" placeholder="12자리 이상" onchange="check_pass()">
+                </div>
+                <div class="repeat-passwowrd-form">
+                    <label for="repeat-passwowrd">재입력</label>
+                    <input type="password" name="repeat-passwowrd" id="repeat-password" placeholder="비밀번호 재입력" onchange="check_pass()">
+                </div>
+                <div>
+                    <label for="" style="font-size:11px; color:blue;">Check Password</label>
+                    <span id="check-password" style="flex-grow:6;">&#10003;</span>
+                </div>
+                <div class="rank-form">
+                    <label for="rank">직급</label>
+                    <input type="text" name="rank" placeholder="원장">
+                </div>
+                <div class="hospital-form">
+                    <!-- for문으로 받아온 병원 리스트 표시해주기(dropdown) -->
+                    <label for="hospital">병원</label>
+                    <button type="button" style="width:39px; height:40px; flex-grow:1; margin: 5px;" onClick="HospitalSearch()">검색</button>
+                    <input type="text" name="hospital" id="hospital" placeholder="솔봄동물병원">
+                </div>
+                <div class="major-form">
+                    <label for="major" class="input-tel">전공</label>
+                    <input type="text" id="major" name="major" placeholder="수의학과">
+                </div>
+                <div class="career-form">
+                    <label for="career">경력 사항</label>
+                    <textarea name="career" id="career" cols="30" rows="10" placeholder="300제한"></textarea>
+                </div>
+                <input type="hidden" name="role" value=1 />
+            </div>
+            <!-- <div class="search-address-form">
+                <input type="button" value="병원 주소 검색" onclick="goPopup()" style="cursor:pointer" />
+                <input name="roadAddrPart1" type="text" placeholder="도로명주소" />
+                <input name="addrDetail" type="text" placeholder="고객입력 상세주소" />
+                <input name="zipNo" type="text" placeholder="우편번호" />
+            </div> -->
+            <button type="submit">회원 가입</button>
+        </form>
+      </div>
+      <script language="javascript">
+        avatar.onchange = evt => {
+            const [file] = avatar.files
+            if (file) {
+                preview.src = URL.createObjectURL(file)
+                console.log(preview.src)
+            }
+            }
+
+        function check_pass() {
+            if(document.getElementById('password').value == document.getElementById('repeat-password').value){
+                document.getElementById('check-password').style.color = 'green'
+            } else {
+                document.getElementById('check-password').style.color = 'red'
+            }
+        }
+
+        function HospitalSearch() {
+            var pop = window.open(
+                '/auth/hospital/Popup',
+                'pop',
+                'width=570,height=420, scrollbars=yes, resizable=yes'
+            );
+        }
+
+      </script>
+</body>
+</html>

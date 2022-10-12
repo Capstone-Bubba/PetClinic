@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/index.css">
+</head>
+<%- include('../partials/sidebar') %>
+
+<body>
+    <section class="home">
+        <div class="logo-img">
+            <img src="/petlogo.ico" alt="" class="logo-img">
+        </div>
+        <div class="container">
+            <div class="userinfo">
+                <img class="user-photo" src="/images/vet_thumbnail/이지원.jpg" alt="사용자 이미지">
+                <div class="grid-container">
+                        <label for="">이름</label>
+                        <p>이지원</p>
+                        <label for="">전화번호</label>
+                        <p>010 - 8291 - 5455</p>
+                        <label for="">소속/직급</label>
+                        <p>솔 동물 의료센터 대표 원장</p>
+                        <label for="">성별</label>
+                        <p>남</p>
+                        <label for="">주소</label>
+                        <p>경기도 군포시 고산로 529, 금강 2단지 상가 경기 폴리텍 고등학교 맞은편</p>
+                        <label for="">사무실 번호</label>
+                        <p>031 - 345 - 4500</p>
+                </div>
+            </div>
+            <div class="career">
+                <div>
+                    <span>경력 사항</span>
+                    <!-- for문 -->
+                    <p>2022.09.12 ~ 2023.04.16 서울대학교 수의학과 졸업</p>
+                    <p>2022.09.12 ~ 2023.04.16 서울대학교 수의학과 졸업</p>
+                    <p>2022.09.12 ~ 2023.04.16 서울대학교 수의학과 졸업</p>
+                    <p>2022.09.12 ~ 2023.04.16 서울대학교 수의학과 졸업</p>
+                </div>
+                <div>
+                    <span>최근 진료 내역</span>
+                    <!-- for문 <a href='diagnosis/'></a> -->
+                    <p>
+                        2022-08-23 
+                        홍길동님 강아지 ‘미란 궤양’ 화상 진단
+                        </p>
+                    <p>2022-07-13 
+                        김갑수님 강아지 ‘구진플라크’ 화상 진단</p>
+                    <p>2022-06-26
+                        윤대영님 강아지 ‘비듬 각질 상피성 잔고리’ 진단</p>
+                </div>
+            </div>
+            <button onClick="location.href='/auth/update'">수정</button>
+        </div>
+    </section>
+</body>
+</html>

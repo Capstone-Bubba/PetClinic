@@ -15,8 +15,8 @@ const checkUserID = (parameters) => {
 
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO userInfo (user_name, email, phone, address) VALUES (?, ?, ?, ?)`;
-        db.query(queryData, [parameters.user_name, parameters.email, parameters.phone, parameters.address], (err, db_data) => {
+        let queryData = `INSERT INTO user (role, user_name, email, phone, address, password) VALUES (NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), NULLIF(?,''), NULLIF(?,''))`;
+        db.query(queryData, [parameters.role, parameters.user_name, parameters.email, parameters.phone, parameters.address, parameters.password], (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -28,7 +28,7 @@ const insertUser = (parameters) => {
 
 const checkUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let query = `SELECT EXISTS (SELECT * FROM userInfo WHERE email = ?) AS isUser`;
+        let query = `SELECT EXISTS (SELECT * FROM user WHERE email = ?) AS isUser`;
         db.query(query, parameters.email, (err, db_data) => {
             if(err) {
                 reject(err);
@@ -52,9 +52,51 @@ const getAddr = (parameters) => {
     })
 }
 
+const getHospital = () => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT h_name FROM hospital`;
+        db.query(query, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const searchHospital = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT h_name FROM hospital WHERE h_name LIKE ?`;
+        db.query(query, [parameters.word], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const checkPassword = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT password FROM user where email=?`;
+        db.query(query, [parameters.email], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
     checkUser,
-    getAddr
+    getAddr,
+    getHospital,
+    searchHospital,
+    checkPassword,
 }

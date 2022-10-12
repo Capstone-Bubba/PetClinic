@@ -1,0 +1,10 @@
+/* views/alert.ejs */
+
+<script type="text/javascript">
+    alert('<%=result%>')
+    if('<%=result%>' == '회원가입 완료'){
+        location.href='/'
+    } else {    
+        history.back();
+    }
+</script>
