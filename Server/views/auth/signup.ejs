@@ -57,8 +57,10 @@
                     <input type="text" name="rank" placeholder="원장">
                 </div>
                 <div class="hospital-form">
+                    <!-- for문으로 받아온 병원 리스트 표시해주기(dropdown) -->
                     <label for="hospital">병원</label>
-                    <input type="text" name="hospital" placeholder="솔봄동물병원">
+                    <button type="button" style="width:39px; height:40px; flex-grow:1; margin: 5px;" onClick="HospitalSearch()">검색</button>
+                    <input type="text" name="hospital" id="hospital" placeholder="솔봄동물병원">
                 </div>
                 <div class="major-form">
                     <label for="major" class="input-tel">전공</label>
@@ -95,6 +97,15 @@
                 document.getElementById('check-password').style.color = 'red'
             }
         }
+
+        function HospitalSearch() {
+            var pop = window.open(
+                '/auth/hospital/Popup',
+                'pop',
+                'width=570,height=420, scrollbars=yes, resizable=yes'
+            );
+        }
+
       </script>
 </body>
 </html>

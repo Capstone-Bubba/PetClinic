@@ -52,9 +52,51 @@ const getAddr = (parameters) => {
     })
 }
 
+const getHospital = () => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT h_name FROM hospital`;
+        db.query(query, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const searchHospital = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT h_name FROM hospital WHERE h_name LIKE ?`;
+        db.query(query, [parameters.word], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const checkPassword = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let query = `SELECT password FROM user where email=?`;
+        db.query(query, [parameters.email], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
     checkUser,
     getAddr,
+    getHospital,
+    searchHospital,
+    checkPassword,
 }

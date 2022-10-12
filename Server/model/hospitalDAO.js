@@ -43,8 +43,22 @@ const Check_Hospital = (parameters) => {
     })
 };
 
+const Check_Hospital_Web = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT h_num FROM hospital WHERE h_name = ?`;
+        db.query(queryData, [parameters.h_name], (err, db_data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+      })
+    })
+};
+
 module.exports = {
     getNearHospital,
     Create_Hospital,
     Check_Hospital,
+    Check_Hospital_Web,
 }

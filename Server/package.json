@@ -26,6 +26,7 @@
     "passport-kakao": "^1.0.1",
     "regenerator-runtime": "^0.13.9",
     "serve-favicon": "^2.5.0",
+    "socket.io": "^4.5.2",
     "tfjs": "^0.6.0",
     "yolov5": "^1.0.11"
   }

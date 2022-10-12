@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding : 1%;
+            background-color: #AFD485;
+        }
+
+        h1 {
+            text-align :center;
+            padding : 2%;
+            color : #707070;
+        }
+
+        .search-box{
+            text-align: center;
+        }
+
+        .hospital-list {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        span {
+            width: 100%;
+            flex-grow : 1;
+            text-align: left;
+            color : #707070;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        span:hover {
+            cursor: pointer;
+            background-color: rgb(241, 138, 124);
+        }
+
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: stretch;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>병원 검색</h1>
+        <form action="/auth/hospital/Popup" method="post">
+            <div style="flex-grow: 1;" class="search-box">
+                <input type="text" name="hospital" id="hospital" style="border-radius:5px; width:60%; margin: 5px 0;">
+                <button type="submit">검색</button>
+            </div>
+        </form>
+        <% if(judgement == 1) { %>
+        <div class="hospital-list">
+            <% for(let i=0; i<result.length; i++) { %>
+                <span onClick="getParentId(`<%=result[i].h_name%>`)"><%=result[i].h_name%></span>
+            <% } %>
+        </div>
+        <% } else {} %>
+    </div>
+</body>
+<script>
+    function getParentId(i) {
+        window.opener.document.getElementById("hospital").value = i
+        window.close()
+    }
+</script>
+</html>

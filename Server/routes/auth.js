@@ -39,11 +39,17 @@ router.post('/address/Popup', (req, res) => {
     res.render('auth/addressPopup');
 });
 
+router.get('/hospital/Popup', authCtrl.search_hospital);
+
+router.post('/hospital/Popup', authCtrl.getHospitalName);
+
 router.get('/hospital', (req, res) => {
     // role 체크 이후 만약 관리자가 아니라면 권한 접근 오류 alert
     res.render('auth/hospitalForm');
 })
 
 router.post('/hospital', authCtrl.InsertHospital);
+
+router.get('/logout', authCtrl.logout);
 
 module.exports = router;

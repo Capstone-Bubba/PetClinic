@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const hospitalDAO = require('../model/hospitalDAO');
+const authCtrl = require('../controller/authCtrl');
 
 const geo = require('node-geocoder');
 
@@ -15,6 +16,8 @@ router.get('/', (req, res) => {
   res.render('auth/loginForm');
 });
 
+router.post('/', authCtrl.WebLogin);
+
 // 강제 URI 접속 막기
 // router.get('/mypage', (req, res) => {
 //   res.render('alert', { result : '잘못된 접근입니다.'});
@@ -22,11 +25,6 @@ router.get('/', (req, res) => {
 
 router.get('/mypage', (req, res) => {
   // 만약 로그인 정보가 없으면 res.render('alert')
-  res.render('main/mypage');
-})
-
-router.post('/mypage', (req, res) => {
-  console.log(req.body);
   res.render('main/mypage');
 })
 
