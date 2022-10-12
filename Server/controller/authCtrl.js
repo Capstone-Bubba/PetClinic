@@ -1,4 +1,5 @@
 const authDAO = require('../model/authDAO');
+const day = require('dayjs');
 const hospitalDAO = require('../model/hospitalDAO');
 const doctorDAO = require('../model/doctorDAO');
 
@@ -24,11 +25,12 @@ const signUp = async (req, res) => {
             user_name: req.body.name,
             address: req.body.address
         }
-        console.log(parameters)
+        
         const answer = await authDAO.insertUser(parameters);
+        const user_data = await authDAO.getUserData(parameters);
 
         if(answer.affectedRows === 1) {
-            res.send('1');
+            res.send({success: '1', user_data});
         } else {
             console.log('No AffectedRows');
         }
@@ -38,6 +40,21 @@ const signUp = async (req, res) => {
     }
 }
 
+const getUserData = async (req, res) => {
+    try {
+        const parameters = {
+            email: req.body.email
+        }
+        
+        const user_data = await authDAO.getUserData(parameters);
+        let date = day(user_data[0].createAt);
+        user_data[0].createAt = date.format('YYYY-MM-DD')
+        console.log(user_data);
+        res.send(user_data);
+    } catch(err) {
+        console.log(err);
+    }
+}
 // Web Controller (Doctor)
 
 const WebSignup = async (req, res) => {
@@ -177,6 +194,7 @@ module.exports = {
     sendResult,
     kakaoAppLogin,
     signUp,
+    getUserData,
     WebSignup,
     InsertHospital,
     getHospitalName,

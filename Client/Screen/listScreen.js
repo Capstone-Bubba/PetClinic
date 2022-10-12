@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Button, Image, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, FlatList } from 'react-native';
-import axios from 'axios'
+import { Text, View, Button, Image, SafeAreaView, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'
 
 import imgPath from '../assets/login.png'
 import locationImgPath from '../assets/location.png';
@@ -9,11 +9,28 @@ import cam from '../assets/cam2.png';
 import notCam from '../assets/notcam2.png';
 
 export default function ListScreen({ navigation, route }) {
-    const renderItem = route.params.data.map((el, index) =>
+    const [renderData, setData] = useState([]);
+
+    useEffect(() => {
+        AsyncStorage.getItem('email')
+            .then(async data => {
+                await axios.post('http://10.0.2.2:3000/detect/hospital', { 'email': data })
+                    .then(async (res) => {
+                        if (res.data.length !== 0) {
+                            await setData(res.data)
+                            // await renderItem();
+                        }
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+            })
+    }, [])
+
+    const renderItem = renderData.map((el, index) =>
         <View style={[styles.resultContainer, styles.resultContainerShadow]} key={index}>
             <TouchableOpacity onPress={() => {
                 navigation.navigate('Hospital', { data: el });
-                console.log(el);
             }} key='drop' style={styles.touchableStyle}>
                 <View style={styles.imgViewContainer}>
                     <Image style={styles.imgStyle} source={imgPath} />
@@ -58,7 +75,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     touchableStyle: {
-        // borderWidth: 1,
         flexDirection: 'row',
         paddingLeft: '3%'
     },
@@ -82,8 +98,6 @@ const styles = StyleSheet.create({
     },
     camViewContainer: {
         flex: 1,
-        // borderWidth: 2,
-        // justifyContent: 'center',
         alignItems: 'flex-end',
         marginTop: 13,
         marginRight: 10
@@ -91,14 +105,12 @@ const styles = StyleSheet.create({
     imgViewContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        // borderWidth: 1,
         width: '25%',
         height: '100%'
     },
     textViewContainer: {
         paddingLeft: '3%',
         paddingTop: '3%',
-        // borderWidth: 3
     },
     resultContainer: {
         justifyContent: 'center',

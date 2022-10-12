@@ -52,4 +52,6 @@ router.post('/hospital', authCtrl.InsertHospital);
 
 router.get('/logout', authCtrl.logout);
 
+router.post('/get-user', authCtrl.getUserData)
+
 module.exports = router;

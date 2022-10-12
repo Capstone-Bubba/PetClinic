@@ -5,7 +5,7 @@ import Postcode from '@actbase/react-daum-postcode'
 export default function AddressScreen({navigation, route}) {
     console.log(route.params)
     const getAddressData = data => {
-        navigation.navigate('Second', {email: route.params.email, name: route.params.name, postcode: data.address, });
+        navigation.navigate('SignIn', {email: route.params.email, name: route.params.name, postcode: data.address, });
     }
 
     return (

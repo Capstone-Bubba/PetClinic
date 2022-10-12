@@ -15,6 +15,7 @@ const detectRouter = require('./routes/detect')
 const noticeRouter = require('./routes/notice');
 const diagnosisRouter = require('./routes/diagnosis');
 const callRouter = require('./routes/call');
+const petRouter = require('./routes/pet');
 
 app.set('view engine','ejs');
 app.engine('html', require('ejs').renderFile);
@@ -38,6 +39,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/detect', detectRouter);
+app.use('/main', petRouter)
 app.use('/notice', noticeRouter);
 app.use('/diagnosis', diagnosisRouter);
 app.use('/call', callRouter);
