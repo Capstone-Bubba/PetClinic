@@ -54,7 +54,7 @@ export default function MainScreen({ navigation, route }) {
             AsyncStorage.getItem('user_num')
                 .then(async (data) => {
                     if (data !== null) {
-                        await axios.post('http://10.0.2.2:3000/main', { 'user_num': data })
+                        await axios.post('https://10.0.2.2:3000/main', { 'user_num': data })
                             .then(async (res) => {
                                 const user_data = res.data;
                                 setName(user_data.pet_name);
@@ -108,7 +108,7 @@ export default function MainScreen({ navigation, route }) {
                     formData.append('user_num', data);
                 })
 
-            await axios.post('http://10.0.2.2:3000/main/update', formData, {
+            await axios.post('https://10.0.2.2:3000/main/update', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -246,7 +246,7 @@ export default function MainScreen({ navigation, route }) {
                 <View style={styles.modalInfoContainer}>
                     <TouchableOpacity style={styles.profileContainer} onPress={() => setCamModalVisible(true)}>
                         {/* <Image source={imgPath} style={styles.modalProfileStyle}/> */}
-                        <Image source={photo.length !== 0 ? (newPhoto.length !== 0 ? newPhoto : { uri: `http://10.0.2.2:3000/profileImg/${photo}` }) : chooseImg} style={styles.modalProfileStyle} />
+                        <Image source={photo.length !== 0 ? (newPhoto.length !== 0 ? newPhoto : { uri: `https://10.0.2.2:3000/profileImg/${photo}` }) : chooseImg} style={styles.modalProfileStyle} />
                     </TouchableOpacity>
                     <View style={styles.moreInfoContainer}>
                         <View style={styles.modalNameContainer}>
@@ -317,12 +317,12 @@ export default function MainScreen({ navigation, route }) {
             </Modal>
             <View style={styles.imgContainer}>
                 {/* <Image source={imgPath} style={styles.imgStyle} /> */}
-                <Image source={photo.length !== 0 ? { uri: `http://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
+                <Image source={photo.length !== 0 ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
             </View>
             <View style={styles.infoContainer}>
                 <View style={styles.profileContainer}>
                     {/* <Image source={imgPath} style={styles.profileStyle}/> */}
-                    <Image source={photo.length !== 0 ? { uri: `http://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.profileStyle} />
+                    <Image source={photo.length !== 0 ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.profileStyle} />
                 </View>
                 <View style={styles.moreInfoContainer}>
                     <View style={styles.nameContainer}>

@@ -53,7 +53,7 @@ function Profile({ navigation, route }) {
             const token = await login();
             const profile = await getProfile(token);
 
-            axios.post('http://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
+            axios.post('https://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
                 .then((res) => {
                     if (res.data.isUser !== 0) {
                         state._isUser = true;
@@ -94,7 +94,7 @@ function Profile({ navigation, route }) {
     }
 
     const getDataFunc = async (email) => {
-        await axios.post('http://10.0.2.2:3000/auth/get-user', { 'email': email })
+        await axios.post('https://10.0.2.2:3000/auth/get-user', { 'email': email })
             .then(async (res) => {
                 if (res.data.length !== 0) {
                     console.log(res.data);
@@ -134,7 +134,7 @@ function Profile({ navigation, route }) {
             <View style={styles.topContainer}>
                 <View style={styles.imgContainer}>
                     {/* <Image source={imgPath} style={styles.imgStyle} /> */}
-                    <Image source={isLogin ? { uri: `http://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
+                    <Image source={isLogin ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
                 </View>
                 <View style={styles.nameContainer}>
                     <View style={{ flexDirection: 'row' }}>
