@@ -12,6 +12,15 @@ const option = {
 const detection = (req, res) => {
     const part = req.body.part
     let modelPath;
+    const petStatus = {
+        '구진 플라크': 0, 
+        '비듬 각질 상피성 잔고리': 1, 
+        '태선화 과다 색소 침착': 2, 
+        '농포 여드름': 3, 
+        '미란 궤양': 4, 
+        '결절 종괴': 5, 
+        '건강': 6
+    }
     file = path.join(__dirname + '/../' + req.file.path);
     switch (part) {
         case 'head':
@@ -41,6 +50,7 @@ const detection = (req, res) => {
         console.log(data.toString());
         result = await data.toString();
     })
+    
     python.on('close', () => {
         res.send(result);
     })

@@ -9,4 +9,6 @@ router.post('/kakao/login', authCtrl.kakaoAppLogin);
 
 router.post('/signup', authCtrl.signUp);
 
+router.post('/get-user', authCtrl.getUserData)
+
 module.exports = router;

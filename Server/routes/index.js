@@ -9,7 +9,6 @@ const option = {
   apiKey: 'AIzaSyA4gWVk1uzNyqDXbV2cPjmrLVq2oIeb_es'
 }
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.send('index Page');

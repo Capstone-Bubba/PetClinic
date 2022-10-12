@@ -1,19 +1,32 @@
 import { Text, View, Button, TextInput, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function SecondScreen({ navigation, route }) {
+export default function SignInScreen({ navigation, route }) {
     const email = route.params.email;
     const name = route.params.name;
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
 
+    const storeData = async (user_num) => {
+        try {
+            console.log(user_num)
+            await AsyncStorage.setItem('user_num', user_num);
+            console.log('token saved');
+        } catch (err) {
+            console.log('token save error,', err);
+        }
+    }
+
     const signUp = () => {
         if (phone.length !== 0) {
             axios.post('http://10.0.2.2:3000/auth/signup', { 'email': email, 'phone': phone, 'name': name, 'address': route.params.postcode + ' ' + address })
                 .then((res) => {
-                    if (Number(res.data) === 1) {
-                        navigation.navigate('Third');
+                    console.log(res.data);
+                    if (Number(res.data.success) === 1) {
+                        storeData(res.data.user_data[0].user_num.toString());
+                        navigation.navigate('ProfileScreen');
                     }
                 })
                 .catch((err) => {

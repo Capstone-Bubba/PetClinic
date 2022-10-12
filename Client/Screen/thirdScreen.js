@@ -5,6 +5,7 @@ import axios from 'axios';
 import camera from '../assets/camera.png';
 import gallery from '../assets/gallery.png';
 import imgPath from '../assets/login.png'
+import testImg from '../assets/testimg.jpg'
 
 export default function ThirdScreen({ navigation }) {
     const [photo, setPhoto] = useState(imgPath);
@@ -96,6 +97,8 @@ export default function ThirdScreen({ navigation }) {
             formData.append('images', { uri: photo.uri, name: name, type });
             formData.append('part', part)
 
+            console.log(formData._parts)
+
             if (part.length !== 0) {
                 await axios.post('http://10.0.2.2:3000/detect/detecting', formData, {
                     headers: {
@@ -130,7 +133,8 @@ export default function ThirdScreen({ navigation }) {
     return (
         <View style={styles.container}>
             <View style={styles.imgContainer}>
-                <Image source={photo} style={styles.img} />
+                {/* <Image source={photo} style={styles.img} /> */}
+                <Image source={testImg} style={styles.img} />
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={showPicker} style={styles.buttonStyle}>
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
         // borderWidth: 3,
     },
     selectImg: {
-        width: '50%',
+        width: '60%',
         height: '100%'
     },
     imgContainer: {

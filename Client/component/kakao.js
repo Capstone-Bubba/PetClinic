@@ -3,13 +3,15 @@ import React, { useState } from 'react';
 import {
     getProfile,
     login,
+    logout
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import KakaoShareLink from 'react-native-kakao-share-link';
 
 const imgPath = require('../assets/login.png');
 
-function KakaoLogin({ navigation }) {
+export default function KakaoLogin({ navigation, route }) {
     const [result, setResult] = useState('');
     let state = {
         _isLogin: false,
@@ -43,9 +45,8 @@ function KakaoLogin({ navigation }) {
                     }
 
                     state._isUser ?
-                        navigation.navigate("Third") :
+                        navigation.navigate("Main") :
                         navigation.navigate("Second", { email: profile.email, name: profile.nickname });
-                    // navigation.navigate("Second");
 
                     console.log(state._isUser)
                 })
@@ -59,28 +60,55 @@ function KakaoLogin({ navigation }) {
         }
     }
 
+    const signOutWithKakao = async () => {
+        const message = await logout();
+        setResult(message);
+    }
+
     const testing = () => {
         navigation.navigate('Third');
     }
 
-    return (
-        <View style={styles.container}>
-            <Image style={styles.loginLogo} source={imgPath} />
-            <Button style={styles.loginButton} title='로그인' onPress={signInWithKakao} />
-            <Button title='testing' onPress={testing} />
-        </View>
-    )
+    const kakaoShare = async () => {
+        try {
+            const response = await KakaoShareLink.sendLocation({
+                address: route.params.data.addr_basic,
+                addressTitle: route.params.data.hospital_name,
+                content: {
+                    title: route.params.data.hospital_name,
+                    imageUrl:
+                        'http://t1.daumcdn.net/friends/prod/editor/dc8b3d02-a15a-4afa-a88b-989cf2a50476.jpg',
+                    link: {
+                        webUrl: 'https://developers.kakao.com/',
+                        mobileWebUrl: 'https://developers.kakao.com/',
+                    },
+                    description: route.params.data.addr_basic,
+                },
+            })
+            console.log(response)
+        } catch (err) {
+            console.error(err);
+            console.error(err.message);
+        }
+    }
+
+    // return (
+    //     <View style={styles.container}>
+    //         <Image style={styles.loginLogo} source={imgPath} />
+    //         <Button style={styles.loginButton} title='로그인' onPress={signInWithKakao} />
+    //         <Button title='testing' onPress={kakaoShare} />
+    //     </View>
+    // )
 }
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        marginTop: 100
+        paddingTop: 100
     },
     loginButton: {
         color: '#fd6f22',
     },
 });
-
-export default KakaoLogin;

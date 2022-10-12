@@ -3,29 +3,37 @@ import { Text, View, Button, Image, SafeAreaView, StyleSheet, PermissionsAndroid
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function ResultScreen({ navigation, route }) {
-    const [renderData, setData] = useState([]);
+import testImg from '../assets/testimg.jpg';
 
-    useEffect(() => {
-        AsyncStorage.getItem('email')
-            .then(async data => {
-                await axios.post('http://10.0.2.2:3000/detect/hospital', { 'email': data })
-                    .then(async (res) => {
-                        if (res.data.length !== 0) {
-                            await setData(res.data)
-                            // await renderItem();
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+export default function ResultScreen({ navigation, route }) {
+    const isEmpty = function (value) {
+        if (value == "" || value == null || value == undefined || (value != null && typeof (value) == "object" && !Object.keys(value).length)) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    const loginCheck = () => {
+        AsyncStorage.getItem('user_num')
+            .then((data) => {
+                if (isEmpty(data)) {
+                    console.log(data);
+                    navigation.navigate('List', { photo: route.params.photo });
+                } else {
+                    Alert.alert(
+                        '경고',
+                        '로그인이 필요합니다'
+                    )
+                }
             })
-    }, [])
+    }
 
     return (
         <View style={styles.container}>
             <View style={styles.imgContainer}>
                 <Image source={route.params.photo} style={styles.img} />
+                {/* <Image source={testImg} style={styles.img} /> */}
             </View>
             <View style={styles.resultContainer}>
                 <Text style={styles.resultStyle}>
@@ -33,7 +41,10 @@ export default function ResultScreen({ navigation, route }) {
                 </Text>
             </View>
             <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonStyle} onPress={() => {navigation.navigate('List', {data: renderData})}}>
+                <TouchableOpacity style={styles.buttonStyle} onPress={() => {
+                    loginCheck();
+                    // navigation.navigate('List')
+                }}>
                     <Text>가까운 병원 보기</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonStyle}>
