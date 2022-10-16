@@ -12,7 +12,6 @@ const getPetData = async (req, res) => {
 
 const updatePetData = async (req, res) => {
     try {
-        console.log(req.file)
         const parameters = req.body
         parameters.pet_img = req.file.originalname;
         
@@ -26,7 +25,7 @@ const updatePetData = async (req, res) => {
         const imgName = await petDAO.getPet(user_num);
 
         if(result.affectedRows === 1) {
-            res.status(200).send(imgName[0].pet_img);
+            res.status(200).send(imgName[0]);
         } else {
             console.log('Something Wrong!!');
         }
