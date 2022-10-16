@@ -3,8 +3,6 @@ import { Text, View, Button, Image, SafeAreaView, StyleSheet, PermissionsAndroid
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import testImg from '../assets/testimg.jpg';
-
 export default function ResultScreen({ navigation, route }) {
     const isEmpty = function (value) {
         if (value == "" || value == null || value == undefined || (value != null && typeof (value) == "object" && !Object.keys(value).length)) {
@@ -30,28 +28,27 @@ export default function ResultScreen({ navigation, route }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.imgContainer}>
-                <Image source={route.params.photo} style={styles.img} />
-                {/* <Image source={testImg} style={styles.img} /> */}
-            </View>
-            <View style={styles.resultContainer}>
-                <Text style={styles.resultStyle}>
-                    {route.params.data}
-                </Text>
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.buttonStyle} onPress={() => {
-                    loginCheck();
-                    // navigation.navigate('List')
-                }}>
-                    <Text>가까운 병원 보기</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.buttonStyle}>
-                    <Text>다시 촬영하기</Text>
-                </TouchableOpacity>
-            </View>
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Image source={route.params.photo} style={styles.img} />
         </View>
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultStyle}>{route.params.data}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={() => {
+              loginCheck();
+              // navigation.navigate('List')
+            }}>
+            <Text style={{color: 'black'}}>가까운 병원 보기</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonStyle}>
+            <Text style={{color: 'black'}}>다시 촬영하기</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
 }
 

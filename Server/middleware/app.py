@@ -19,17 +19,21 @@ def transform_image(infile):
 
 def predict(imgPath, modelPath):
     input_tensor = transform_image(imgPath)
+    # input_tensor = transform_image('C:/Users/Dong/Desktop/PetClinic/server/public/images/rn_image_picker_lib_temp_ff76c8a5-7319-4143-a165-57e281db3914.jpg')
     
     model = EfficientNet.from_name('efficientnet-b0', num_classes=7)
     model.load_state_dict(torch.load(modelPath, map_location='cpu'))
+    # model.load_state_dict(torch.load('C:/Users/Dong/Desktop/PetClinic/server/public/model/petclinc_model_b0.pt', map_location='cpu'))
+
     model.eval()
     
     output = model(input_tensor)
     result = output[0].tolist()
     idx = result.index(max(result))
-    disease = ['구진 플라크', '비듬 각질 상피성 잔고리', '태선화 과다 색소 침착', '농포 여드름', '미란 궤양', '결절 종괴', '건강']
-    
+    disease = ['plaque', 'collarette', 'lichenification', 'acne', 'ulcer', 'nodule', 'health']
+    #disease = ['구진 플라크', '비듬 각질 상피성 잔고리', '태선화 과다 색소 침착', '농포 여드름', '미란 궤양', '결절 종괴', '건강']
     print(disease[idx], end='')
+    # print('dong')
     
 if __name__ == '__main__':
     predict(sys.argv[1], sys.argv[2])

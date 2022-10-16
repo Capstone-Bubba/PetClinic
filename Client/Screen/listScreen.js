@@ -14,16 +14,19 @@ export default function ListScreen({ navigation, route }) {
     useEffect(() => {
         AsyncStorage.getItem('email')
             .then(async data => {
-                await axios.post('https://10.0.2.2:3000/detect/hospital', { 'email': data })
-                    .then(async (res) => {
-                        if (res.data.length !== 0) {
-                            await setData(res.data)
-                            // await renderItem();
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+                await axios
+                  .post('https://odhok.kro.kr:3000/detect/hospital', {
+                    email: data,
+                  })
+                  .then(async res => {
+                    if (res.data.length !== 0) {
+                      await setData(res.data);
+                      // await renderItem();
+                    }
+                  })
+                  .catch(err => {
+                    console.log(err);
+                  });
             })
     }, [])
 
@@ -39,7 +42,7 @@ export default function ListScreen({ navigation, route }) {
                     <Text style={styles.hospitalNameStyle} key='name'>{el.hospital_name}</Text>
                     <View style={{ flexDirection: 'row' }}>
                         <Image source={locationImgPath} style={{ width: 20, height: 20 }} />
-                        <Text key='dist'>{el.distance.toFixed(2)}km</Text>
+                        <Text key='dist' style={{color: 'black'}}>{el.distance.toFixed(2)}km</Text>
                     </View>
                 </View>
                 <View style={styles.camViewContainer}>

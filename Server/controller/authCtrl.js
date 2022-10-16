@@ -12,10 +12,9 @@ const kakaoAppLogin = async (req, res) => {
     const parameters = {
         email: req.body.email
     }
-    console.log('kakao', req);
 
     const data = await authDAO.checkUser(parameters);
-    console.log(data);
+    console.log(data[0].isUser);
     res.send({isUser: data[0].isUser})
 }
 

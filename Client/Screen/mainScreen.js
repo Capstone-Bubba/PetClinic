@@ -3,7 +3,6 @@ import { Text, View, TextInput, Image, PermissionsAndroid, SafeAreaView, StyleSh
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import imgPath from '../assets/dog2.jpeg';
 import maleIcon from '../assets/mars.png';
 import femaleIcon from '../assets/venus.png';
 import settingIcon from '../assets/settings.png';
@@ -54,21 +53,30 @@ export default function MainScreen({ navigation, route }) {
             AsyncStorage.getItem('user_num')
                 .then(async (data) => {
                     if (data !== null) {
-                        await axios.post('https://10.0.2.2:3000/main', { 'user_num': data })
-                            .then(async (res) => {
-                                const user_data = res.data;
-                                setName(user_data.pet_name);
-                                setAge(user_data.pet_age);
-                                setWeight(user_data.pet_weight);
-                                setPhoto(user_data.pet_img);
-                                setNeuterValue(user_data.neutralization);
-                                setSpeciesValue(user_data.species);
-                                setGender(user_data.pet_gender);
-                                await setIsLogin(true);
-                                console.log('user_data in main', user_data);
-                                console.log(data);
-                                console.log('T login', isLogin);
+                        fetch('https://odhok.kro.kr:3000/main', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                user_num: data
                             })
+                        })
+                        .then(res => res.json())
+                        .then(async res => {
+                          const user_data = res;
+                              setName(user_data.pet_name);
+                              setAge(user_data.pet_age);
+                              setWeight(user_data.pet_weight);
+                              setPhoto(user_data.pet_img);
+                              setNeuterValue(user_data.neutralization);
+                              setSpeciesValue(user_data.species);
+                              setGender(user_data.pet_gender);
+                              await setIsLogin(true);
+                              console.log('user_data in main', user_data);
+                              console.log(data);
+                              console.log('T login', isLogin);
+                        })
                     } else {
                         setName('');
                         setAge(0);
@@ -108,15 +116,14 @@ export default function MainScreen({ navigation, route }) {
                     formData.append('user_num', data);
                 })
 
-            await axios.post('https://10.0.2.2:3000/main/update', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            await fetch('https://odhok.kro.kr:3000/main/update', {
+                method: 'POST',
+                body: formData
             })
-                .then((res) => {
-                    setPhoto(res.data)
-                    console.log(formData._parts);
-                })
+            .then(res => res.json())
+            .then(res => {
+                setPhoto(res.pet_img);
+              })
         } catch (err) {
             console.log(err);
         }
@@ -152,8 +159,6 @@ export default function MainScreen({ navigation, route }) {
             const imageName = localUri.split("/").pop();
 
             setNewPhoto({ uri: localUri });
-            // setPhoto({ uri: localUri });
-            // setPhoto(newPhoto);
             setImgName(imageName);
         } else {
             console.log("Camera permission denied");
@@ -196,190 +201,252 @@ export default function MainScreen({ navigation, route }) {
     }
 
     return (
-        <View style={styles.container}>
-            <Modal
-                animationType="slide"
-                visible={camModalVisible}
-                transparent={true}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!camModalVisible);
-                }}
-            >
-                <Pressable style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                }}
-                    onPress={() => setCamModalVisible(false)}
+      <View style={styles.container}>
+        <Modal
+          animationType="slide"
+          visible={camModalVisible}
+          transparent={true}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!camModalVisible);
+          }}>
+          <Pressable
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+            }}
+            onPress={() => setCamModalVisible(false)}
+          />
+          <View style={styles.camModalContainer}>
+            <TouchableOpacity
+              onPress={() => {
+                showPicker();
+                setCamModalVisible(false);
+              }}>
+              <View style={styles.camButtonStyle}>
+                <Text>카메라로 촬영</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setCamModalVisible(false)}>
+              <View style={styles.camButtonStyle}>
+                <Text>갤러리에서 선택</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+        <Modal
+          animationType="slide"
+          visible={modalVisible}
+          transparent={true}
+          onRequestClose={() => {
+            Alert.alert('Modal has been closed.');
+            setModalVisible(!modalVisible);
+          }}>
+          <Pressable
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+            }}
+            onPress={() => setModalVisible(false)}
+          />
+          <View style={styles.modalInfoContainer}>
+            <TouchableOpacity
+              style={styles.profileContainer}
+              onPress={() => setCamModalVisible(true)}>
+              <Image
+                source={
+                  photo.length !== 0
+                    ? newPhoto.length !== 0
+                      ? newPhoto
+                      : {uri: `https://odhok.kro.kr:3000/profileImg/${photo}`}
+                    : chooseImg
+                }
+                style={styles.modalProfileStyle}
+              />
+            </TouchableOpacity>
+            <View style={styles.moreInfoContainer}>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>이름 </Text>
+                <TextInput
+                  style={styles.modalNameStyle}
+                  value={name}
+                  onChangeText={setName}
                 />
-                <View style={styles.camModalContainer}>
-                    <TouchableOpacity onPress={() => {
-                        showPicker();
-                        setCamModalVisible(false);
-                    }}>
-                        <View style={styles.camButtonStyle}>
-                            <Text>카메라로 촬영</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => setCamModalVisible(false)}>
-                        <View style={styles.camButtonStyle}>
-                            <Text>갤러리에서 선택</Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
-            </Modal>
-            <Modal
-                animationType="slide"
-                visible={modalVisible}
-                transparent={true}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                    setModalVisible(!modalVisible);
-                }}
-            >
-                <Pressable style={{
-                    flex: 1,
-                    backgroundColor: 'transparent',
-                }}
-                    onPress={() => setModalVisible(false)}
+              </View>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>견종 </Text>
+                <DropDownPicker
+                  open={speciesOpen}
+                  value={speciesValue}
+                  items={speciesitems}
+                  placeholder={speciesValue}
+                  setOpen={setSpeciesOpen}
+                  setValue={setSpeciesValue}
+                  setItems={setSpeciesItems}
+                  onChangeValue={() => {
+                    console.log(speciesValue);
+                  }}
+                  style={{width: 120}}
                 />
-                <View style={styles.modalInfoContainer}>
-                    <TouchableOpacity style={styles.profileContainer} onPress={() => setCamModalVisible(true)}>
-                        {/* <Image source={imgPath} style={styles.modalProfileStyle}/> */}
-                        <Image source={photo.length !== 0 ? (newPhoto.length !== 0 ? newPhoto : { uri: `https://10.0.2.2:3000/profileImg/${photo}` }) : chooseImg} style={styles.modalProfileStyle} />
-                    </TouchableOpacity>
-                    <View style={styles.moreInfoContainer}>
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>이름 </Text>
-                            <TextInput style={styles.modalNameStyle} value={name} onChangeText={setName} />
-                        </View>
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>견종 </Text>
-                            <DropDownPicker
-                                open={speciesOpen}
-                                value={speciesValue}
-                                items={speciesitems}
-                                placeholder={speciesValue}
-                                setOpen={setSpeciesOpen}
-                                setValue={setSpeciesValue}
-                                setItems={setSpeciesItems}
-                                onChangeValue={() => { console.log(speciesValue) }}
-                                style={{ width: 120 }}
-                            />
-                        </View>
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>나이 </Text>
-                            <TextInput style={styles.modalNameStyle} keyboardType='numeric' value={age} onChangeText={setAge} />
-                        </View>
+              </View>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>나이 </Text>
+                <TextInput
+                  style={styles.modalNameStyle}
+                  keyboardType="numeric"
+                  value={age}
+                  onChangeText={setAge}
+                />
+              </View>
 
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>몸무게 </Text>
-                            <TextInput style={styles.modalNameStyle} value={weight} onChangeText={setWeight} keyboardType='numeric' />
-                            <Text> kg</Text>
-                        </View>
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>성별 </Text>
-                            <DropDownPicker
-                                open={genderOpen}
-                                value={gender}
-                                items={genderItems}
-                                placeholder={gender}
-                                setOpen={setGenderOpen}
-                                setValue={setGender}
-                                setItems={setGenderItems}
-                                style={{ width: 70, marginBottom: 5, marginTop: 5 }}
-                            />
-                        </View>
-                        <View style={styles.modalNameContainer}>
-                            <Text style={styles.modalTextStyle}>중성화 여부 </Text>
-                            <View style={{ width: 70, elevation: 1 }}>
-                                <DropDownPicker
-                                    open={neuterOpen}
-                                    value={neuterValue}
-                                    items={neuterItems}
-                                    placeholder={neuterValue}
-                                    setOpen={setNeuterOpen}
-                                    setValue={setNeuterValue}
-                                    setItems={setNeuterItems}
-                                />
-                            </View>
-                        </View>
-                    </View>
-                    <TouchableOpacity style={{ width: 20, height: 20, alignItems: 'center', justifyContent: 'center' }}
-                        onPress={() => {
-                            setModalVisible(false);
-                            saveData();
-                        }}
-                    >
-                        <Image source={saveIcon} style={{ width: 20, height: 20 }} />
-                    </TouchableOpacity>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>몸무게 </Text>
+                <TextInput
+                  style={styles.modalNameStyle}
+                  value={weight}
+                  onChangeText={setWeight}
+                  keyboardType="numeric"
+                />
+                <Text> kg</Text>
+              </View>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>성별 </Text>
+                <DropDownPicker
+                  open={genderOpen}
+                  value={gender}
+                  items={genderItems}
+                  placeholder={gender}
+                  setOpen={setGenderOpen}
+                  setValue={setGender}
+                  setItems={setGenderItems}
+                  style={{width: 70, marginBottom: 5, marginTop: 5}}
+                />
+              </View>
+              <View style={styles.modalNameContainer}>
+                <Text style={styles.modalTextStyle}>중성화 여부 </Text>
+                <View style={{width: 70, elevation: 1}}>
+                  <DropDownPicker
+                    open={neuterOpen}
+                    value={neuterValue}
+                    items={neuterItems}
+                    placeholder={neuterValue}
+                    setOpen={setNeuterOpen}
+                    setValue={setNeuterValue}
+                    setItems={setNeuterItems}
+                  />
                 </View>
-            </Modal>
-            <View style={styles.imgContainer}>
-                {/* <Image source={imgPath} style={styles.imgStyle} /> */}
-                <Image source={photo.length !== 0 ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
+              </View>
             </View>
-            <View style={styles.infoContainer}>
-                <View style={styles.profileContainer}>
-                    {/* <Image source={imgPath} style={styles.profileStyle}/> */}
-                    <Image source={photo.length !== 0 ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.profileStyle} />
-                </View>
-                <View style={styles.moreInfoContainer}>
-                    <View style={styles.nameContainer}>
-                        <Text style={styles.nameStyle}>{name}</Text>
-                        <Image source={ Boolean(gender) ? femaleIcon : maleIcon} style={styles.genderImgStyle} />
-                    </View>
-                    <View style={styles.speciesContainer}>
-                        <Text style={styles.infoStyle}>{speciesValue}</Text>
-                    </View>
-                    <View style={styles.infoBox}>
-                        <Text style={styles.infoStyle}>나이 : {age}</Text>
-                        <Text style={styles.infoStyle}>중성화 여부 : {Boolean(neuterValue) ? 'O' : 'X'}</Text>
-                        <Text style={styles.infoStyle}>몸무게 : {weight}kg</Text>
-                    </View>
-                </View>
-                <TouchableOpacity style={{ width: 20, height: 20, alignItems: 'center', justifyContent: 'center' }}
-                    onPress={() => { isLogin ? setModalVisible(true) : navigation.navigate('Profile') }}
-                >
-                    <Image style={{ width: 20, height: 20 }} source={settingIcon} />
-                </TouchableOpacity>
-            </View>
-            <View style={styles.bottomContainer}>
-                <View style={styles.emptySpace}>
-
-                </View>
-                <View style={styles.ButtonConatainer}>
-                    <View style={styles.rowButtonContainer}>
-                        <View style={styles.singleTLButtonContainer}>
-                            <TouchableOpacity style={styles.buttonStyle} onPress={() => { navigation.navigate('Third') }}>
-                                <Text>AI 진단</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.singleTRButtonContainer}>
-                            <TouchableOpacity style={styles.buttonStyle} onPress={() => {
-                                console.log(isLogin);
-                                isLogin ? navigation.navigate('List') : navigation.navigate('Profile');
-                            }}>
-                                <Text>주변 병원</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.rowButtonContainer}>
-                        <View style={styles.singleBLButtonContainer}>
-                            <TouchableOpacity style={styles.buttonStyle}>
-                                <Text>진단 기록</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.singleBRButtonContainer}>
-                            <TouchableOpacity style={styles.buttonStyle}>
-                                <Text>갤러리</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-            </View>
+            <TouchableOpacity
+              style={{
+                width: 20,
+                height: 20,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+              onPress={() => {
+                setModalVisible(false);
+                saveData();
+              }}>
+              <Image source={saveIcon} style={{width: 20, height: 20}} />
+            </TouchableOpacity>
+          </View>
+        </Modal>
+        <View style={styles.imgContainer}>
+          <Image
+            source={
+              photo.length !== 0
+                ? {uri: `https://odhok.kro.kr:3000/profileImg/${photo}`}
+                : basicImg
+            }
+            style={styles.imgStyle}
+          />
         </View>
-    )
+        <View style={styles.infoContainer}>
+          <View style={styles.profileContainer}>
+            <Image
+              source={
+                photo.length !== 0
+                  ? {uri: `https://odhok.kro.kr:3000/profileImg/${photo}`}
+                  : basicImg
+              }
+              style={styles.profileStyle}
+            />
+          </View>
+          <View style={styles.moreInfoContainer}>
+            <View style={styles.nameContainer}>
+              <Text style={styles.nameStyle}>{name}</Text>
+              <Image
+                source={Boolean(gender) ? femaleIcon : maleIcon}
+                style={styles.genderImgStyle}
+              />
+            </View>
+            <View style={styles.speciesContainer}>
+              <Text style={styles.infoStyle}>{speciesValue}</Text>
+            </View>
+            <View style={styles.infoBox}>
+              <Text style={styles.infoStyle}>나이 : {age}</Text>
+              <Text style={styles.infoStyle}>
+                중성화 여부 : {Boolean(neuterValue) ? 'O' : 'X'}
+              </Text>
+              <Text style={styles.infoStyle}>몸무게 : {weight}kg</Text>
+            </View>
+          </View>
+          <TouchableOpacity
+            style={{
+              width: 20,
+              height: 20,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+            onPress={() => {
+              isLogin ? setModalVisible(true) : navigation.navigate('Profile');
+            }}>
+            <Image style={{width: 20, height: 20}} source={settingIcon} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.bottomContainer}>
+          <View style={styles.emptySpace}></View>
+          <View style={styles.ButtonConatainer}>
+            <View style={styles.rowButtonContainer}>
+              <View style={styles.singleTLButtonContainer}>
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  onPress={() => {
+                    navigation.navigate('Third');
+                  }}>
+                  <Text style={{color: 'black'}}>AI 진단</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.singleTRButtonContainer}>
+                <TouchableOpacity
+                  style={styles.buttonStyle}
+                  onPress={() => {
+                    console.log(isLogin);
+                    isLogin
+                      ? navigation.navigate('List')
+                      : navigation.navigate('Profile');
+                  }}>
+                  <Text style={{color: 'black'}}>주변 병원</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.rowButtonContainer}>
+              <View style={styles.singleBLButtonContainer}>
+                <TouchableOpacity style={styles.buttonStyle}>
+                  <Text style={{color: 'black'}}>진단 기록</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.singleBRButtonContainer}>
+                <TouchableOpacity style={styles.buttonStyle}>
+                  <Text style={{color: 'black'}}>갤러리</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -572,10 +639,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         height: 40,
-        width: 80
+        width: 80,
+        color: 'black'
     },
     modalTextStyle: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: 'black'
     },
     camButtonStyle: {
         width: 150,

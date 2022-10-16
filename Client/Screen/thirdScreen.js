@@ -5,7 +5,6 @@ import axios from 'axios';
 import camera from '../assets/camera.png';
 import gallery from '../assets/gallery.png';
 import imgPath from '../assets/login.png'
-import testImg from '../assets/testimg.jpg'
 
 export default function ThirdScreen({ navigation }) {
     const [photo, setPhoto] = useState(imgPath);
@@ -100,24 +99,40 @@ export default function ThirdScreen({ navigation }) {
             console.log(formData._parts)
 
             if (part.length !== 0) {
-                await axios.post('http://10.0.2.2:3000/detect/detecting', formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
+                // await axios.post('https://odhok.kro.kr:3000/detect/detecting', formData, {
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data'
+                //     }
+                // })
+                //     .then((response) => {
+                //         if(response.data === '건강') {
+                //             Alert.alert(
+                //                 '발견된 문제가 없습니다'
+                //             )
+                //         } else {
+                //             navigation.navigate('Result', {data: response.data, photo: photo})
+                //             console.log(response.data)
+                //         }
+                //     })
+                //     .catch((err) => {
+                //         console.log(err);
+                //     })
+                fetch('https://odhok.kro.kr:3000/detect/detecting', {
+                    method: 'POST',
+                    body: formData
                 })
-                    .then((response) => {
-                        if(response.data === '건강') {
+                .then(res => res.json())
+                .then(res => {
+                    console.log(res)
+                    if(res.result === '건강') {
                             Alert.alert(
                                 '발견된 문제가 없습니다'
                             )
                         } else {
-                            navigation.navigate('Result', {data: response.data, photo: photo})
-                            console.log(response.data)
+                            navigation.navigate('Result', {data: res.result, photo: photo})
+                            console.log(res.result);
                         }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                    })
+                })
             } else {
                 Alert.alert(
                     '경고',
@@ -131,39 +146,61 @@ export default function ThirdScreen({ navigation }) {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.imgContainer}>
-                {/* <Image source={photo} style={styles.img} /> */}
-                <Image source={testImg} style={styles.img} />
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity onPress={showPicker} style={styles.buttonStyle}>
-                    <Image style={styles.selectImg} source={camera} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={choosePhoto} style={styles.buttonStyle}>
-                    <Image style={styles.selectImg} source={gallery} />
-                </TouchableOpacity>
-            </View>
-            <View style={[styles.sendButtonContainer, { opacity: getOpacity }]}>
-                <TouchableOpacity onPress={sendPhoto} style={styles.sendButtonStyle} disabled={btnStatus}>
-                    <Text>사진 전송</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={[styles.partBtnContainer, { opacity: getOpacity }]}>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('head') }}>
-                    <Text>머리</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('abdomen') }}>
-                    <Text>배</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('foot') }}>
-                    <Text>발</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.partBtn, { backgroundColor: '#DDDD' }]} disabled={btnStatus} onPress={() => { setPart('crotch') }}>
-                    <Text>사타구니</Text>
-                </TouchableOpacity>
-            </View>
+      <View style={styles.container}>
+        <View style={styles.imgContainer}>
+          <Image source={photo} style={styles.img} />
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity onPress={showPicker} style={styles.buttonStyle}>
+            <Image style={styles.selectImg} source={camera} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={choosePhoto} style={styles.buttonStyle}>
+            <Image style={styles.selectImg} source={gallery} />
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.sendButtonContainer, {opacity: getOpacity}]}>
+          <TouchableOpacity
+            onPress={sendPhoto}
+            style={styles.sendButtonStyle}
+            disabled={btnStatus}>
+            <Text style={{color: 'black'}}>사진 전송</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={[styles.partBtnContainer, {opacity: getOpacity}]}>
+          <TouchableOpacity
+            style={[styles.partBtn, {backgroundColor: '#DDDD'}]}
+            disabled={btnStatus}
+            onPress={() => {
+              setPart('head');
+            }}>
+            <Text style={{color: 'black'}}>머리</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.partBtn, {backgroundColor: '#DDDD'}]}
+            disabled={btnStatus}
+            onPress={() => {
+              setPart('abdomen');
+            }}>
+            <Text style={{color: 'black'}}>배</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.partBtn, {backgroundColor: '#DDDD'}]}
+            disabled={btnStatus}
+            onPress={() => {
+              setPart('foot');
+            }}>
+            <Text style={{color: 'black'}}>발</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.partBtn, {backgroundColor: '#DDDD'}]}
+            disabled={btnStatus}
+            onPress={() => {
+              setPart('crotch');
+            }}>
+            <Text style={{color: 'black'}}>사타구니</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
 }
 

@@ -21,7 +21,7 @@ export default function SignInScreen({ navigation, route }) {
 
     const signUp = () => {
         if (phone.length !== 0) {
-            axios.post('http://10.0.2.2:3000/auth/signup', { 'email': email, 'phone': phone, 'name': name, 'address': route.params.postcode + ' ' + address })
+            axios.post('https://odhok.kro.kr:3000/auth/signup', { 'email': email, 'phone': phone, 'name': name, 'address': route.params.postcode + ' ' + address })
                 .then((res) => {
                     console.log(res.data);
                     if (Number(res.data.success) === 1) {

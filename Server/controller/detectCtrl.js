@@ -9,7 +9,7 @@ const option = {
     apiKey: 'AIzaSyA4gWVk1uzNyqDXbV2cPjmrLVq2oIeb_es'
 }
 
-const detection = (req, res) => {
+const detection = async (req, res) => {
     const part = req.body.part
     let modelPath;
     const petStatus = {
@@ -42,17 +42,31 @@ const detection = (req, res) => {
         default:
             console.log('nothing');
     }
-    const python = spawn('python3', ['./middleware/app.py', file, modelPath]);
-
+    const python = await spawn('python', ['./middleware/app.py', file, modelPath]);
+ 
+    const disease = {
+        plaque: '구진 플라크',
+        collarette: '비듬 각질 상피성 잔고리',
+        lichenification: '태선화 과다 색소 침착',
+        acne: '농포 여드름',
+        ulcer: '미란 궤양',
+        nodule: '결절 종괴',
+        health: '건강'
+    }
     let result;
 
     python.stdout.on('data', async (data) => {
-        console.log(data.toString());
-        result = await data.toString();
+        result = await disease[data.toString()];
+        console.log(result)
+    })
+
+    python.stderr.on('data', (data) => {
+        console.log('err', data.toString())
     })
     
     python.on('close', () => {
-        res.send(result);
+        console.log(result.toString());
+        res.send({'result': result});
     })
 }
 
