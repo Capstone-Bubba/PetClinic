@@ -41,7 +41,7 @@ const getUserData = (parameters) => {
 
 const checkUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let query = `SELECT EXISTS (SELECT * FROM user WHERE email = ?) AS isUser`;
+        let query = `SELECT EXISTS (SELECT * FROM userInfo WHERE email = ?) AS isUser`;
         db.query(query, parameters.email, (err, db_data) => {
             if (err) {
                 reject(err);

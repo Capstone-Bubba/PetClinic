@@ -14,7 +14,7 @@ export default function ListScreen({ navigation, route }) {
     useEffect(() => {
         AsyncStorage.getItem('email')
             .then(async data => {
-                await axios.post('http://10.0.2.2:3000/detect/hospital', { 'email': data })
+                await axios.post('https://10.0.2.2:3000/detect/hospital', { 'email': data })
                     .then(async (res) => {
                         if (res.data.length !== 0) {
                             await setData(res.data)
