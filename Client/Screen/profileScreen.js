@@ -7,7 +7,9 @@ import {
 } from '@react-native-seoul/kakao-login';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import KakaoShareLink from 'react-native-kakao-share-link';
+// import { fetch } from 'react-native-ssl-pinning';
+import RNFetchBlob from "rn-fetch-blob";
+
 
 const imgPath = require('../assets/dog2.jpeg');
 import basicImg from '../assets/basicPicture.jpeg';
@@ -52,24 +54,29 @@ function Profile({ navigation, route }) {
         try {
             const token = await login();
             const profile = await getProfile(token);
-
-            axios.post('https://10.0.2.2:3000/auth/kakao/login', { 'email': profile.email })
-                .then((res) => {
+            
+            await RNFetchBlob.config({
+                trusty: true
+            })
+                .fetch("POST", "https://10.0.2.2:3000/auth/kakao/login",
+                    { 'Content-Type': 'application/json' },
+                    JSON.stringify({ 'email': profile.email })
+                )
+                .then(res => {
                     if (res.data.isUser !== 0) {
                         state._isUser = true;
                     }
-                    
+
                     state._isUser ? (() => {
-                        console.log(token)
                         storeData(token.accessToken, token.refreshToken, profile.email);
                         getDataFunc(profile.email);
-                    })() : 
+                    })() :
                         navigation.navigate("SignIn", { email: profile.email, name: profile.nickname });
                 })
-                .catch((err) => {
-                    console.log(err);
+                .catch(err => {
+                    console.log(`error: ${err}`)
                     setResult(JSON.stringify(err));
-                })
+                });
         } catch (err) {
             Alert.alert(err.message);
             console.log(err.message);
@@ -94,37 +101,63 @@ function Profile({ navigation, route }) {
     }
 
     const getDataFunc = async (email) => {
-        await axios.post('https://10.0.2.2:3000/auth/get-user', { 'email': email })
+        await RNFetchBlob.config({
+            trusty: true
+        })
+            .fetch('POST', 'https://10.0.2.2:3000/auth/get-user',
+                { 'Content-Type': 'application/json' },
+                JSON.stringify({ 'email': email })
+            )
             .then(async (res) => {
                 if (res.data.length !== 0) {
-                    console.log(res.data);
-                    const address = res.data[0].address
-                    const user_num = res.data[0].user_num.toString();
+                    const obj = JSON.parse(res.data)
+                    const address = obj.address
+                    const user_num = obj.user_num.toString();
+                    
                     storeUserData(user_num, address);
                     setIsLogin(true);
-                    setName(res.data[0].user_name);
-                    setDate(res.data[0].createAt);
-                    setEmail(res.data[0].email);
-                    setPhone(res.data[0].phone);
-                    setAddr(res.data[0].address);
-                    setPhoto(res.data[0].pet_img);
+                    setName(obj.user_name);
+                    setDate(obj.createAt);
+                    setEmail(obj.email);
+                    setPhone(obj.phone);
+                    setAddr(obj.address);
+                    setPhoto(obj.pet_img);
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
+        // await axios.post('https://10.0.2.2:3000/auth/get-user', { 'email': email })
+        //     .then(async (res) => {
+        //         if (res.data.length !== 0) {
+        //             console.log(res.data);
+        //             const address = res.data[0].address
+        //             const user_num = res.data[0].user_num.toString();
+        //             storeUserData(user_num, address);
+        //             setIsLogin(true);
+        //             setName(res.data[0].user_name);
+        //             setDate(res.data[0].createAt);
+        //             setEmail(res.data[0].email);
+        //             setPhone(res.data[0].phone);
+        //             setAddr(res.data[0].address);
+        //             setPhoto(res.data[0].pet_img);
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
     }
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             AsyncStorage.getItem('email')
-            .then((data) => {
-                if(data !== null) {
-                    getDataFunc(data);
-                } else {
-                    console.log('asd')
-                }
-            })
+                .then((data) => {
+                    if (data !== null) {
+                        getDataFunc(data);
+                    } else {
+                        console.log('asd')
+                    }
+                })
         })
         return unsubscribe;
     }, [navigation])
@@ -134,7 +167,7 @@ function Profile({ navigation, route }) {
             <View style={styles.topContainer}>
                 <View style={styles.imgContainer}>
                     {/* <Image source={imgPath} style={styles.imgStyle} /> */}
-                    <Image source={isLogin ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
+                    <Image onError={(e) => console.log(e.nativeEvent.error) } source={isLogin ? { uri: `https://10.0.2.2:3000/profileImg/${photo}` } : basicImg} style={styles.imgStyle} />
                 </View>
                 <View style={styles.nameContainer}>
                     <View style={{ flexDirection: 'row' }}>

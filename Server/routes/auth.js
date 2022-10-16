@@ -10,8 +10,6 @@ router.post('/kakao/login', authCtrl.kakaoAppLogin);
 
 router.post('/app/signup', authCtrl.signUp);
 
-// Web Router
-
 router.get('/signup', (req, res) => {
     res.render('auth/signup');
 });
@@ -19,16 +17,13 @@ router.get('/signup', (req, res) => {
 router.post('/signup',  uploadPhoto.DocPhoto.single('avatar'), authCtrl.WebSignup);
 
 router.get('/update', (req, res) => {
-    // 현재 접속해 있는 유저아이디 값을 이용하여 DB 전체 값을 가져와서 value값에 추가.
     res.render('auth/update');
 });
 
-// router.post('/update', (req, res) => {
-//     // signup과 같은 행동 이지만 sql문은 update 문으로 변경
-//     res.render('main/mypage');
-// });
-
-// router.post('/detail', authCtrl.WebDetail);
+router.get('/testing', (req, res) => {
+    console.log('asd');
+    res.send('asd');
+})
 
 router.get('/address/Popup', (req, res) => {
     res.render('auth/addressPopup');

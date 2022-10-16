@@ -12,6 +12,8 @@ const kakaoAppLogin = async (req, res) => {
     const parameters = {
         email: req.body.email
     }
+    console.log('kakao', req);
+
     const data = await authDAO.checkUser(parameters);
     console.log(data);
     res.send({isUser: data[0].isUser})
@@ -45,12 +47,13 @@ const getUserData = async (req, res) => {
         const parameters = {
             email: req.body.email
         }
+        console.log(parameters);
         
         const user_data = await authDAO.getUserData(parameters);
         let date = day(user_data[0].createAt);
         user_data[0].createAt = date.format('YYYY-MM-DD')
         console.log(user_data);
-        res.send(user_data);
+        res.send(user_data[0]);
     } catch(err) {
         console.log(err);
     }
