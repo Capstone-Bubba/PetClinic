@@ -77,7 +77,7 @@ const WebSignup = async (req, res) => {
         console.log(parameters);
         const data = await authDAO.checkUser(parameters);
         const hospital = await hospitalDAO.Check_Hospital_Web(parameters);
-        const h_num = hospital[0].h_num;
+        const h_num = hospital[0].hospital_num;
         if(data[0].isUser == 1){
             res.render('alert', {result : '이미 존재하는 아이디입니다.'});
         }
@@ -187,7 +187,7 @@ const WebLogin = async (req, res) => {
         // if(pwd != parameters.passwd){
         //     res.render('alert', {result : '비밀번호 오류'});
         // } else {
-            res.render('/main/mypage');
+            res.render('main/mypage');
         // }
     }
 }

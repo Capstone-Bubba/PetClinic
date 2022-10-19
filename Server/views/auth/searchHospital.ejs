@@ -61,7 +61,7 @@
         <% if(judgement == 1) { %>
         <div class="hospital-list">
             <% for(let i=0; i<result.length; i++) { %>
-                <span onClick="getParentId(`<%=result[i].h_name%>`)"><%=result[i].h_name%></span>
+                <span onClick="getParentId(`<%=result[i].hospital_name%>`)"><%=result[i].hospital_name%> <br>주소: <%=result[i].addr_st%></span>
             <% } %>
         </div>
         <% } else {} %>

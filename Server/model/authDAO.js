@@ -80,7 +80,7 @@ const getHospital = () => {
 
 const searchHospital = (parameters) => {
     return new Promise((resolve, reject) => {
-        let query = `SELECT h_name FROM hospital WHERE h_name LIKE ?`;
+        let query = `SELECT hospital_name, addr_basic, addr_st FROM hospital WHERE hospital_name LIKE ?`;
         db.query(query, [parameters.word], (err, db_data) => {
             if(err) {
                 reject(err);
