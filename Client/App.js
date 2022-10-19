@@ -13,6 +13,7 @@ import ListScreen from './Screen/listScreen';
 import HospitalScreen from './Screen/hospitalScreen';
 import MainScreen from './Screen/mainScreen';
 import ProfileScreen from './Screen/profileScreen';
+// import CallScreen from './Screen/callScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,6 +46,7 @@ export default function App() {
       <Tab.Navigator screenOptions={{ headerShown: false }}>
         <Tab.Screen name='Main' component={MainStack} />
         <Tab.Screen name='Profile' component={ProfileStack} />
+        {/* <Tab.Screen name='Call' component={CallScreen} /> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

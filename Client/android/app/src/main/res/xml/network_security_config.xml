@@ -8,5 +8,14 @@
         <domain includeSubdomains="true">localhost</domain>
         <domain includeSubdomains="true">odhok.kro.kr</domain>
         <domain includeSubdomains="true">odhok.kro.kr:3000</domain>
+        <domain includeSubdomains="true">ocsp.digicert.com</domain>
+        <domain includeSubdomains="true">crl3.digicert.com</domain>
+        <domain includeSubdomains="true">crl4.digicert.com</domain>
+        <domain includeSubdomains="true">crl.godaddy.com</domain>
+        <domain includeSubdomains="true">certificates.godaddy.com</domain>
+        <domain includeSubdomains="true">crl.starfieldtech.com</domain>
+        <domain includeSubdomains="true">certificates.starfieldtech.com</domain>
+        <domain includeSubdomains="true">ocsp.godaddy.com</domain>
+        <domain includeSubdomains="true">ocsp.starfieldtech.com</domain>
     </domain-config>
 </network-security-config>

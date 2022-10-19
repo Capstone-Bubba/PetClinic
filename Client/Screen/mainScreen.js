@@ -186,15 +186,11 @@ export default function MainScreen({ navigation, route }) {
             }
 
             const localUri = result.assets[0].uri;
-            const uriPath = localUri.split("//").pop();
-            const imageName = localUri.split("/").pop();
+            const uriPath = localUri.split('//').pop();
+            const imageName = localUri.split('/').pop();
 
-            console.log('image', imageName);
-
-            setPhoto({ uri: localUri });
-            setName(imageName);
-            setOpacity(1);
-            setBtnStatus(false);
+            setNewPhoto({uri: localUri});
+            setImgName(imageName);
         } else {
             console.log("Camera permission denied");
         }
@@ -227,7 +223,10 @@ export default function MainScreen({ navigation, route }) {
                 <Text>카메라로 촬영</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => setCamModalVisible(false)}>
+            <TouchableOpacity onPress={() => {
+              choosePhoto();
+              setCamModalVisible(false)
+              }}>
               <View style={styles.camButtonStyle}>
                 <Text>갤러리에서 선택</Text>
               </View>

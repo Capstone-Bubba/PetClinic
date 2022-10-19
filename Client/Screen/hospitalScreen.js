@@ -1,13 +1,105 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, Image, SafeAreaView, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
+import { Text, Alert, useColorScheme, NativeEventEmitter, Platform, View, Image, SafeAreaView, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native';
 import { KakaoMapView } from '@jiggag/react-native-kakao-maps';
 import KakaoShareLink from 'react-native-kakao-share-link';
+
+import CallScreen from './callScreen';
 
 import telIcon from '../assets/telephone.png';
 import camIcon from '../assets/cam-recorder.png';
 import shareIcon from '../assets/share.png'
 
+import ZoomUs, {ZoomEmitter, ZoomUsVideoView} from 'react-native-zoom-us';
+
+import {extractDataFromJoinLink} from '../extractDataFromJoinLink';
+
+import sdkJwtTokenJson from '../api/sdk.jwt.json';
+
+const sdkKey = 'u7DXonFoa9AVMWZIcWhgK0ekCNfSSVfayyIa';
+const sdkSecret = 'nziYp8gkOlq9Tz4f9RBN0ri0viivIf0ChQp1';
+
+const sdkJwtToken = sdkJwtTokenJson.jwtToken;
+
+const exampleJoinLink =
+  'https://us05web.zoom.us/j/88482755624?pwd=QVQxR2JYcWR5emx5Y3IrYkp2bVRZQT09';
+
+const exampleJoinMeeting = extractDataFromJoinLink(exampleJoinLink);
+
+const enableCustomizedMeetingUI = false;
+
 export default function HospitaltScreen({ navigation, route }) {
+    const isDarkMode = useColorScheme() === 'dark';
+    const [isInitialized, setIsInitialized] = useState(false);
+    const [isMeetingOngoing, setIsMeetingOngoing] = useState(false);
+
+    console.log({isDarkMode});
+
+    useEffect(() => {
+      (async () => {
+        try {
+          const initializeResult = await ZoomUs.initialize(
+            sdkJwtToken
+              ? {jwtToken: sdkJwtToken}
+              : {clientKey: sdkKey, clientSecret: sdkSecret},
+            {
+              language: 'ko',
+              enableCustomizedMeetingUI,
+            },
+          );
+
+          console.log({initializeResult});
+
+          setIsInitialized(true);
+        } catch (e) {
+          Alert.alert('Error', 'Could not execute initialize');
+          console.error('ERR', e);
+        }
+      })();
+    }, []);
+
+    useEffect(() => {
+      if (!isInitialized) {
+        return;
+      }
+
+      // For more see https://github.com/mieszko4/react-native-zoom-us/blob/master/docs/EVENTS.md
+      const zoomEmitter = new NativeEventEmitter(ZoomEmitter);
+      const eventListener = zoomEmitter.addListener(
+        'MeetingEvent',
+        ({event, status, ...params}) => {
+          console.log({event, status, params}); //e.g.  "endedByHost" (see more: https://github.com/mieszko4/react-native-zoom-us/blob/master/docs/EVENTS.md)
+
+          if (status === 'MEETING_STATUS_CONNECTING') {
+            setIsMeetingOngoing(true);
+          }
+
+          if (status === 'MEETING_STATUS_DISCONNECTING') {
+            // Once it is set it is good to render
+            setIsMeetingOngoing(false);
+          }
+        },
+      );
+
+      return () => eventListener.remove();
+    }, [isInitialized]);
+
+    const joinMeeting = async () => {
+      try {
+        const joinMeetingResult = await ZoomUs.joinMeeting({
+          autoConnectAudio: true,
+          userName: `Wick ${Platform.OS}`,
+          meetingNumber: exampleJoinMeeting.meetingNumber || '',
+          password: exampleJoinMeeting.password || '',
+          noMeetingErrorMessage: true, // Set this to be able to show Alert.alert
+        });
+
+        console.log({joinMeetingResult});
+      } catch (e) {
+        Alert.alert('Error', 'Could not execute joinMeeting');
+        console.error('ERR', e);
+      }
+    };
+    
     const kakaoShare = async () => {
         try {
             const response = await KakaoShareLink.sendLocation({
@@ -77,7 +169,10 @@ export default function HospitaltScreen({ navigation, route }) {
                   <Text style={{color: 'black'}}>전화</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.touchContainer}>
+              <TouchableOpacity
+                style={styles.touchContainer}
+                onPress={() => joinMeeting()}
+                disabled={!isInitialized}>
                 <View style={styles.touchViewContainer}>
                   <Image source={camIcon} style={styles.camIconStyle} />
                   <Text style={{color: 'black'}}>화상통화</Text>
