@@ -10,6 +10,10 @@
 > Back-End : Node.js(Express), MariaDB
 
 > AI : EfficientNet
+
+### 문서
+- [시연영상](https://youtu.be/WRAzGKIQda4)
+- [논문](http://kips.or.kr/bbs/confn/article/2250)
 ----------
 ### 개발인원 (총 4명)
 
